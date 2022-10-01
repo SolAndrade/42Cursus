@@ -1,26 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   isalnum.c                                          :+:      :+:    :+:   */
+/*   putchar_fd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: soandrad <soandrad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/20 17:33:20 by soandrad          #+#    #+#             */
-/*   Updated: 2022/09/22 11:32:06 by soandrad         ###   ########.fr       */
+/*   Created: 2022/09/29 16:49:41 by soandrad          #+#    #+#             */
+/*   Updated: 2022/09/29 19:35:48 by soandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-//#include <stdio.h>
 
-int	ft_isalnum(int c)
+/// @brief Sends the character 'c' to the file descriptor specified.
+/// @param c Character to be sent.
+/// @param fd File descriptor where to write.
+void	ft_putchar_fd(char c, int fd)
 {
-	if (ft_isalpha(c) == 1 || ft_isdigit(c) == 1)
-		return (1);
-	return (0);
+	write(fd, &c, 1);
 }
-
-// int main()
-// {
-// 	printf("%d", ft_isalnum('3'));
-// }

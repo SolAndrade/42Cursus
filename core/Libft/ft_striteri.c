@@ -1,39 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   strncmp.c                                          :+:      :+:    :+:   */
+/*   striteri.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: soandrad <soandrad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/24 17:27:06 by soandrad          #+#    #+#             */
-/*   Updated: 2022/09/24 17:55:21 by soandrad         ###   ########.fr       */
+/*   Created: 2022/09/29 16:31:47 by soandrad          #+#    #+#             */
+/*   Updated: 2022/09/29 20:17:03 by soandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
 #include "libft.h"
-#include <stdio.h>
 
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
+/// @brief Applies the function 'f' to every character from string 's', 
+/// given as parameters the position of every character of 's' and the direction
+/// of the character itself that could be altered if necesary.
+/// @param s String to iterate.
+/// @param f Function applied to every character of 's'.
+void	ft_striteri(char *s, void (*f)(unsigned int, char*))
 {
-	size_t	i;
+	int	i;
 
 	i = 0;
-	while (i < n)
+	while (*s)
 	{
-		if (s1[i] != s2[i])
-			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
-		if (s1[i] == '\0')
-			break ;
+		f(i, (char *)s);
 		i++;
+		s++;
 	}
-	return (0);
 }
-
-// int main()
-// {
-//     char *s1 = "abc";
-//     char *s2 = "abd";
-//     printf("STRNCMP %i", strncmp(s1, s2, 3));
-//     printf("\nFT_STRNCMP %i", ft_strncmp(s1, s2, 3));
-// }

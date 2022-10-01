@@ -1,40 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   bzero.c                                            :+:      :+:    :+:   */
+/*   isprint.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: soandrad <soandrad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/22 18:05:20 by soandrad          #+#    #+#             */
-/*   Updated: 2022/09/22 18:21:38 by soandrad         ###   ########.fr       */
+/*   Created: 2022/09/21 16:04:59 by soandrad          #+#    #+#             */
+/*   Updated: 2022/09/29 20:13:29 by soandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <strings.h>
 #include "libft.h"
-#include <stdio.h>
 
-void	ft_bzero(void *s, size_t n)
+/// @brief Checks whether the passed character is printable. 
+/// A printable character is a character that is not a control character.
+/// @param c Character to be checked.
+/// @return Non-zero value(true) if c is a printable character 
+/// else, zero (false).
+int	ft_isprint(int c)
 {
-	int				zero;
-	size_t			i;
-	unsigned char	*str;
-
-	str = (unsigned char *)s;
-	i = 0;
-	zero = 0;
-	while (i < n)
-	{
-		str[i] = 0;
-		i++;
-	}
+	if (c >= 32 && c <= 126)
+		return (1);
+	return (0);
 }
-
-// int main()
-// {
-//     char b[] = "hola";
-// 	size_t n = 4;
-// 	printf("BZERO %s", bzero(b, n));
-// 	//printf("\nFT_BZERO %s", ft_bzero(b, n));
-// 	ft_bzero(b, n);
-// }

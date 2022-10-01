@@ -1,30 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tolower.c                                          :+:      :+:    :+:   */
+/*   ft_lstsize_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: soandrad <soandrad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/24 17:17:13 by soandrad          #+#    #+#             */
-/*   Updated: 2022/09/24 17:26:27 by soandrad         ###   ########.fr       */
+/*   Created: 2022/09/30 11:44:09 by soandrad          #+#    #+#             */
+/*   Updated: 2022/10/01 17:11:22 by soandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <ctype.h>
 
-int	ft_tolower(int c)
+/// @brief Counts the amount of nodes of a list.
+/// @param lst The beginning of the list.
+/// @return The amount of nodes.
+int	ft_lstsize(t_list *lst)
 {
-	if (c >= 65 && c <= 90)
-	{
-		return (c + 32);
-	}
-	else
-		return (c);
-}
+	int	i;
 
-// int main()
-// {
-//     printf("TOLOWER %c", tolower('A'));
-//     printf("\nFT_TOLOWER %c", ft_tolower('A'));
-// }
+	i = 0;
+	if (!lst)
+		return (0);
+	while (lst)
+	{
+		i++;
+		lst = lst->next;
+	}
+	return (i);
+}

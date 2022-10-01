@@ -6,15 +6,19 @@
 /*   By: soandrad <soandrad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 18:03:07 by soandrad          #+#    #+#             */
-/*   Updated: 2022/09/22 16:58:50 by soandrad         ###   ########.fr       */
+/*   Updated: 2022/09/29 20:18:14 by soandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include <string.h>
-// #include <stdio.h>
-#include <stdlib.h>
 #include "libft.h"
 
+/// @brief searches for the last occurrence of the character c (an unsigned 
+/// char) in the string pointed to, by the argument str.
+/// @param s The string.
+/// @param c Character to be located. It is passed as its int promotion, but 
+/// it is internally converted back to char.
+/// @return A pointer to the last occurrence of character in str. If the value 
+/// is not found, the function returns a null pointer.
 char	*ft_strrchr(const char *s, int c)
 {
 	int		len;
@@ -28,19 +32,3 @@ char	*ft_strrchr(const char *s, int c)
 	}
 	return (0);
 }
-
-// int main()
-// {
-//     const char str[] = "http://www.tutorialspoint.com";
-//     const char ch = 'w';
-//     char *ret;
-//     char *retft;
-
-//     ret = strrchr(str, ch);
-//     retft = ft_strrchr(str, ch);
-
-//     printf("String after |%c| in strrchr is - |%s|\n", ch, ret);
-//     printf("String after |%c| in ft_strrchr is - |%s|\n", ch, retft);
-
-//     return(0);
-// }

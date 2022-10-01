@@ -1,31 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   strlen.c                                           :+:      :+:    :+:   */
+/*   calloc.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: soandrad <soandrad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/21 16:14:02 by soandrad          #+#    #+#             */
-/*   Updated: 2022/09/22 12:55:48 by soandrad         ###   ########.fr       */
+/*   Created: 2022/09/26 15:41:00 by soandrad          #+#    #+#             */
+/*   Updated: 2022/09/29 20:13:11 by soandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
-#include <string.h>
 
-size_t	ft_strlen(const char *str)
+/// @brief Allocates enough space for count objects that are size 
+/// bytes of memory. The allocated memory is filled with bytes of value zero.
+/// @param count Number of elements to be allocated.
+/// @param size Size of elements.
+/// @return A pointer to the allocated memory
+void	*ft_calloc(size_t count, size_t size)
 {
-	size_t	len;
+	int		*arr;
 
-	len = 0;
-	while (str[len])
-		len++;
-	return (len);
+	arr = (int *) malloc (count * size);
+	if (arr)
+		ft_bzero(arr, (count * size));
+	return (arr);
 }
-
-// int main()
-// {
-//     printf("STRLEN %lu", strlen("abc"));
-//     printf("\nFT_STRLEN %zu", ft_strlen("abc"));
-// }

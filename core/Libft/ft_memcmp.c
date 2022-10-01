@@ -6,14 +6,20 @@
 /*   By: soandrad <soandrad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 18:34:40 by soandrad          #+#    #+#             */
-/*   Updated: 2022/09/24 18:48:42 by soandrad         ###   ########.fr       */
+/*   Updated: 2022/10/01 17:22:50 by soandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <string.h>
-#include <stdio.h>
 
+/// @brief Compares the first n bytes of memory area str1 and
+/// memory area str2.
+/// @param s1 Pointer to a block of memory.
+/// @param s2 Pointer to a block of memory.
+/// @param n Number of bytes to be compared.
+/// @return If < 0 it indicates str1 is less than str2. 
+/// If > 0 it indicates str2 is less than str1. 
+/// If = 0 it indicates str1 is equal to str2.
 int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
 	unsigned char	*str1;
@@ -33,11 +39,3 @@ int	ft_memcmp(const void *s1, const void *s2, size_t n)
 	}
 	return (0);
 }
-
-// int main()
-// {
-//     char *s1 = "hola";
-//     char *s2 = "abcd";
-//     printf("MEMCMP %d", memcmp(s1, s2, 4));
-//     printf("\nFT_MEMCMP %d", ft_memcmp(s1, s2, 4));
-// }

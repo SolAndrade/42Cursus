@@ -3,18 +3,24 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: soandrad <soandrad@student.42malaga.com>   +#+  +:+       +#+         #
+#    By: soandrad <soandrad@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/22 12:30:11 by soandrad          #+#    #+#              #
-#    Updated: 2022/09/22 12:30:13 by soandrad         ###   ########.fr        #
+#    Updated: 2022/10/01 17:09:09 by soandrad         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = libft.a
+NAME	=	libft.a
 
-SRCS	=	*.c
+SRCS	=	$(shell find . -name "*.c")
+
+SRCS	=	$(shell find . -type f \( -name "*.c" ! -name "*bonus.c" \) -exec basename {} \;)
+
+B_SRCS	=	$(shell find . -type f -name "*bonus.c" -exec basename {} \;)
 
 OBJS	=	$(SRCS:.c=.o)
+
+B_OBJS	=	$(B_SRCS:.c=.o)
 
 CC		=	gcc
 
@@ -22,18 +28,23 @@ CFLAGS	=	-Wall -Werror -Wextra
 
 RM		=	rm -f
 
-all: ${NAME}
+AR		=	ar -src
 
-${NAME}: ${OBJS}
+${NAME}:			${OBJS}
 			${CC} -c ${CFLAGS} ${SRCS}
-			ar crs ${NAME} ${OBJS}
+			${AR} ${NAME} ${OBJS}
+
+all:		${NAME}
 
 clean: 
-				${RM} ${OBJS}
+			${RM} ${OBJS} ${B_OBJS}
 
 fclean:		clean			
-						${RM} $(NAME)
+			${RM} $(NAME)
 
 re:			fclean all
 
-.PHONY: all, clean, fclean, re
+bonus:		${OBJS} ${B_OBJS} 
+			${AR} ${NAME} ${OBJS} ${B_OBJS}
+
+.PHONY: all, clean, fclean, re, bonus

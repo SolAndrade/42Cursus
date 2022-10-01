@@ -1,40 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   memset.c                                           :+:      :+:    :+:   */
+/*   strdup.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: soandrad <soandrad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/21 16:19:32 by soandrad          #+#    #+#             */
-/*   Updated: 2022/09/22 18:04:48 by soandrad         ###   ########.fr       */
+/*   Created: 2022/09/26 15:47:58 by soandrad          #+#    #+#             */
+/*   Updated: 2022/09/29 20:19:04 by soandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <string.h>
-#include <stddef.h>
-#include <stdio.h>
 
-void	*ft_memset(void *b, int c, size_t len)
+/// @brief Allocates enough memory for a copy of the string s1 and does the 
+/// copy.
+/// @param src String to be copied.
+/// @return A pointer to the copy.
+char	*ft_strdup(char *src)
 {
-	size_t			i;
-	unsigned char	*s;
+	char	*str;
+	int		pos;
 
-	s = (unsigned char *)b;
-	i = 0;
-	while (i < len)
+	pos = 0;
+	str = NULL;
+	str = (char *) malloc ((ft_strlen(src) + 1) * sizeof(char));
+	if (str)
 	{
-		s[i] = (unsigned char)c;
-		i++;
+		while (src[pos])
+		{
+			str[pos] = src[pos];
+			pos++;
+		}
+		str[pos] = '\0';
 	}
-	return (b);
+	return (str);
 }
-
-// int main()
-// {
-// 	char b[] = "hola";
-// 	int c = 'a';
-// 	size_t len = 4;
-// 	printf("MEMSET %s", memset(b, c, len));
-// 	printf("\nFT_MEMSET %s", ft_memset(b, c, len));
-// }

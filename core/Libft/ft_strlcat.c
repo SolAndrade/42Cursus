@@ -6,15 +6,19 @@
 /*   By: soandrad <soandrad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 14:46:30 by soandrad          #+#    #+#             */
-/*   Updated: 2022/09/24 17:46:47 by soandrad         ###   ########.fr       */
+/*   Updated: 2022/09/29 20:17:13 by soandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
 
+/// @brief Copies and concatenates strings with the same input parameters 
+/// and output result.
+/// @param dst First string.
+/// @param src Second string.
+/// @param size Number of bytes to be concatenated.
+/// @return The total length of the string they tried to create 
+/// (initial length of dst plus the length of src).
 size_t	ft_strlcat( char *dst, const char *src, size_t size )
 {
 	unsigned int	sdest;
@@ -38,11 +42,3 @@ size_t	ft_strlcat( char *dst, const char *src, size_t size )
 	dst[dstlen] = '\0';
 	return (sdest + ssrc);
 }
-
-// int main()
-// {
-//     char strdest[20] = "hola";
-//     char strsrc[] = "uno dos";
-//     printf("\nFT_STRLCAT %zu", ft_strlcat(strdest, strsrc, 7));
-//     printf("\n%s", strdest);
-// }

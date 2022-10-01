@@ -6,15 +6,18 @@
 /*   By: soandrad <soandrad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 16:22:24 by soandrad          #+#    #+#             */
-/*   Updated: 2022/09/22 16:59:39 by soandrad         ###   ########.fr       */
+/*   Updated: 2022/09/29 20:16:51 by soandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
-#include <stdio.h>
-#include <stdlib.h>
 #include "libft.h"
 
+/// @brief Searches for the first occurrence of the character c (an unsigned 
+/// char) in the string pointed to by the argument str.
+/// @param s The string to be scanned.
+/// @param c Character to be searched in str.
+/// @return A pointer to the first occurrence of the character c in the 
+/// string str, or NULL if the character is not found.
 char	*ft_strchr(const char *s, int c)
 {
 	unsigned char	ret;
@@ -31,19 +34,3 @@ char	*ft_strchr(const char *s, int c)
 	}
 	return ((char *)s);
 }
-
-// int main()
-// {
-//     const char str[] = "www.test.com";
-//     const char ch = '.';
-//     char *ret;
-//     char *retft;
-
-//     ret = strchr(str, ch);
-//     retft = ft_strchr(str, ch);
-
-//     printf("String after |%c| in strchr is - |%s|\n", ch, ret);
-//     printf("String after |%c| in ft_strchr is - |%s|\n", ch, retft);
-
-//     return(0);
-// }

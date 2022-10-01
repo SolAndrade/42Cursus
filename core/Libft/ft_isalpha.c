@@ -1,28 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   isprint.c                                          :+:      :+:    :+:   */
+/*   isalpha.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: soandrad <soandrad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/21 16:04:59 by soandrad          #+#    #+#             */
-/*   Updated: 2022/09/22 11:33:06 by soandrad         ###   ########.fr       */
+/*   Created: 2022/09/20 13:13:25 by soandrad          #+#    #+#             */
+/*   Updated: 2022/09/29 19:21:25 by soandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-// #include <stdio.h>
-// #include <ctype.h>
 
-int	ft_isprint(int c)
+/// @brief Checks if the passed character is alphabetic.
+/// @param c Character to be checked.
+/// @return Non-zero value if c is an alphabet, else it returns 0.
+int	ft_isalpha(int c)
 {
-	if (c >= 32 && c <= 126)
+	if ((c >= 65) && (c <= 90))
+		return (1);
+	else if ((c >= 97) && (c <= 122))
 		return (1);
 	return (0);
 }
-
-// int main()
-// {
-//      printf("ISPRINT %d", isprint('|'));
-// 	    printf("\nFT_ISPRINT %d", ft_isprint('|'));
-// }
