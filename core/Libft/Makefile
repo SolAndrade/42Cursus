@@ -6,13 +6,11 @@
 #    By: soandrad <soandrad@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/22 12:30:11 by soandrad          #+#    #+#              #
-#    Updated: 2022/10/01 17:09:09 by soandrad         ###   ########.fr        #
+#    Updated: 2022/10/01 19:18:04 by soandrad         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	=	libft.a
-
-SRCS	=	$(shell find . -name "*.c")
 
 SRCS	=	$(shell find . -type f \( -name "*.c" ! -name "*bonus.c" \) -exec basename {} \;)
 

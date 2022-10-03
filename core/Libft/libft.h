@@ -6,18 +6,14 @@
 /*   By: soandrad <soandrad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 13:40:37 by soandrad          #+#    #+#             */
-/*   Updated: 2022/10/01 17:14:48 by soandrad         ###   ########.fr       */
+/*   Updated: 2022/10/03 15:00:36 by soandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 
-# include <stdio.h>
-# include <string.h>
 # include <stdlib.h>
-# include <ctype.h>
-# include <stddef.h>
 # include <unistd.h>
 
 typedef struct s_list

@@ -6,7 +6,7 @@
 /*   By: soandrad <soandrad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/01 16:29:16 by soandrad          #+#    #+#             */
-/*   Updated: 2022/10/01 17:11:34 by soandrad         ###   ########.fr       */
+/*   Updated: 2022/10/01 18:54:21 by soandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,14 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 	final_lst = 0;
 	while (lst != 0)
 	{
-		new_ft = ft_lstnew(f(lst->content));
+		new_ft = (t_list *) malloc (sizeof(t_list));
 		if (!new_ft)
 		{
-			ft_lstclear(&lst, del);
+			ft_lstclear(&final_lst, del);
 			return (0);
 		}
+		new_ft->content = f(lst->content);
+		new_ft->next = NULL;
 		ft_lstadd_back(&final_lst, new_ft);
 		lst = lst->next;
 	}
