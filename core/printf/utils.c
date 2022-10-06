@@ -6,30 +6,35 @@
 /*   By: soandrad <soandrad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 19:01:51 by soandrad          #+#    #+#             */
-/*   Updated: 2022/10/06 20:53:08 by soandrad         ###   ########.fr       */
+/*   Updated: 2022/10/06 21:39:20 by soandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 
-void	ft_putchar(char c)
+int	ft_putchar(char c, int cont)
 {
 	write(1, &c, 1);
+	cont++;
+	return (cont);
 }
 
-void	ft_putstr(char *s)
+int ft_putstr(char *s, int cont)
 {
 	int	i;
 
 	i = 0;
+	if (!s)
+		return (0);
 	while (s[i])
 	{
-		write(1, &s[i], 1);
+		cont = ft_putchar(s[i], cont);
 		i++;
 	}
+	return (cont);
 }
 
-void	ft_putnbr(int n)
+int	ft_putnbr(int n, int cont)
 {
 	char	c;
 
@@ -39,12 +44,14 @@ void	ft_putnbr(int n)
 	{
 		if (n < 0)
 		{
-			write(1, "-", 1);
+			cont = ft_putchar('-', cont);
+			// write(1, "-", 1);
 			n *= -1;
 		}
 		if (n > 9)
-			ft_putnbr(n / 10);
+			cont = ft_putnbr(n / 10, cont);
 		c = (n % 10) + 48;
+		
 		write(1, &c, 1);
 	}
 }
