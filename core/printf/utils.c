@@ -1,36 +1,50 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: soandrad <soandrad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/29 17:18:58 by soandrad          #+#    #+#             */
-/*   Updated: 2022/10/06 20:05:44 by soandrad         ###   ########.fr       */
+/*   Created: 2022/10/05 19:01:51 by soandrad          #+#    #+#             */
+/*   Updated: 2022/10/06 20:53:08 by soandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <unistd.h>
 
-/// @brief Sends the number 'n' to the file descriptor given.
-/// @param n Number to be sent.
-/// @param fd File descriptor where to write.
-void	ft_putnbr_fd(int n, int fd)
+void	ft_putchar(char c)
+{
+	write(1, &c, 1);
+}
+
+void	ft_putstr(char *s)
+{
+	int	i;
+
+	i = 0;
+	while (s[i])
+	{
+		write(1, &s[i], 1);
+		i++;
+	}
+}
+
+void	ft_putnbr(int n)
 {
 	char	c;
 
 	if (n == -2147483648)
-		write(fd, "-2147483648", 11);
+		write(1, "-2147483648", 11);
 	else
 	{
 		if (n < 0)
 		{
-			write(fd, "-", 1);
+			write(1, "-", 1);
 			n *= -1;
 		}
 		if (n > 9)
-			ft_putnbr_fd(n / 10, fd);
+			ft_putnbr(n / 10);
 		c = (n % 10) + 48;
-		write(fd, &c, 1);
+		write(1, &c, 1);
 	}
 }
