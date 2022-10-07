@@ -91,5 +91,27 @@ void	ft_toupper(char c, int *cont)
 
 void	ft_puthexa(int n, int *cont)
 {
-	
+	long int dn;
+	long int m;
+	int tmp;
+	char s;
+
+	dn = 0;
+	while (n > 0)
+	{
+		tmp = n % 16;
+		if (tmp < 10)
+			tmp = tmp + 48;
+		else
+			tmp = tmp + 55;
+		dn = dn*100+tmp;
+		n = n / 16;
+	}
+	m = dn;
+	while (m > 0)
+	{
+		s = m % 100;
+		ft_putchar(s, cont);
+		m = m / 100;
+	}
 }

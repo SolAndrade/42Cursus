@@ -56,7 +56,7 @@ int ft_printf(char const *type, ...)
             else if (type[i] == 'p')
             {
                 integer = va_arg(arg, int);
-                ft_putchar(ft_puthexa(integer, &cont), &cont);
+                ft_puthexa(integer, &cont);
             }
             else if (type[i] == 'i' || type[i] == 'd')
             {
@@ -71,12 +71,12 @@ int ft_printf(char const *type, ...)
             else if (type[i] == 'x')
             {
                 integer = va_arg(arg, int);
-                ft_tolower(ft_puthexa(integer, &cont), &cont);
+                ft_puthexa(integer, &cont);
             }
             else if (type[i] == 'X')
             {
                 integer = va_arg(arg, int);
-                ft_toupper(ft_puthexa(integer, &cont), &cont);
+                ft_puthexa(integer, &cont);
             }
             else
                 ft_putchar(type[i], &cont);
@@ -95,7 +95,8 @@ int main()
     // int x = 123;
     // unsigned int *ptr = &x;
     // printf("The address is: %p, the value is %d", ptr, *ptr);
-    ft_printf("%x", -1);
-    printf("\n%x", -1);
+    //ft_printf("ft%p", -1);
+    //printf("print\n%p", -1);
     // printf(" %x ", 29);
+
 }
