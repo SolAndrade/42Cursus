@@ -6,7 +6,7 @@
 /*   By: soandrad <soandrad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 18:07:34 by soandrad          #+#    #+#             */
-/*   Updated: 2022/10/06 21:38:36 by soandrad         ###   ########.fr       */
+/*   Updated: 2022/10/07 17:10:20 by soandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,13 @@
 #include <stdarg.h>
 #include <unistd.h>
 
-int	ft_putstr(char *s, int cont);
-int	ft_putnbr(int n, int cont);
-int     ft_putchar(char c, int cont);
+void    ft_putstr(char *s, int *cont);
+void    ft_putnbr(int n, int *cont);
+void    ft_putchar(char c, int *cont);
+void	ft_putdecimal(int n, int *cont);
+char	ft_puthexa(int n, int *cont);
+void	ft_tolower(char c, int *cont);
+void	ft_toupper(char c, int *cont);
 
 int ft_printf(char const *type, ...)
 {
@@ -33,7 +37,7 @@ int ft_printf(char const *type, ...)
     {
         while(type[i] != '%' && type[i] != '\0')
         {
-            cont = ft_putchar(type[i], cont);
+            ft_putchar(type[i], &cont);
             i++;
         }
         if (type[i] == '%' && type[i] != '\0')
@@ -42,28 +46,40 @@ int ft_printf(char const *type, ...)
             if (type[i] == 'c')
             {
                 integer = va_arg(arg, int);
-                cont = ft_putchar(integer, cont);
+                ft_putchar(integer, &cont);
             }
             else if (type[i] == 's')
             {
                 s = va_arg(arg, char *);
-                cont = ft_putstr(s, cont);
+                ft_putstr(s, &cont);
             }
-            else if (*type == 'p')
-                return (1);
+            else if (type[i] == 'p')
+            {
+                integer = va_arg(arg, int);
+                ft_putchar(ft_puthexa(integer, &cont), &cont);
+            }
             else if (type[i] == 'i' || type[i] == 'd')
             {
                 integer = va_arg(arg, int);
-                ft_putnbr(integer, cont);
+                ft_putnbr(integer, &cont);
             }
-            else if (*type == 'u')
-                return (1);
-            else if (*type == 'x')
-                return (1);
-            else if (*type == 'X')
-                return (1);
+            else if (type[i] == 'u')
+            {
+                integer = va_arg(arg, int);
+                ft_putdecimal(integer, &cont);
+            }
+            else if (type[i] == 'x')
+            {
+                integer = va_arg(arg, int);
+                ft_tolower(ft_puthexa(integer, &cont), &cont);
+            }
+            else if (type[i] == 'X')
+            {
+                integer = va_arg(arg, int);
+                ft_toupper(ft_puthexa(integer, &cont), &cont);
+            }
             else
-                ft_putchar(type[i], cont);
+                ft_putchar(type[i], &cont);
             i++;
         }
     }
@@ -75,7 +91,11 @@ int main()
 {
     //printf("%d", ft_istype("a%  d"));
     // printf("%c", 'e');
-    // ft_printf("abc %s", "123");
-    // printf("printf NULL %s NULL ", NULL);
-    printf("\n%i", ft_printf(" NULL %s NULL ", NULL));
+    // printf("\n%i", ft_printf(" NULL %s NULL ", NULL));
+    // int x = 123;
+    // unsigned int *ptr = &x;
+    // printf("The address is: %p, the value is %d", ptr, *ptr);
+    ft_printf("%x", -1);
+    printf("\n%x", -1);
+    // printf(" %x ", 29);
 }
