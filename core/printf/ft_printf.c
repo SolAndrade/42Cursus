@@ -18,64 +18,6 @@ typedef struct printf_data
 	char			*s;
 }	t_printf_data;
 
-<<<<<<< HEAD
-    cont = 0;
-    i = 0;
-    va_list arg;
-    va_start(arg, type);
-    while(type[i] != '\0')
-    {
-        while(type[i] != '%' && type[i] != '\0')
-        {
-            ft_putchar(type[i], &cont);
-            i++;
-        }
-        if (type[i] == '%' && type[i] != '\0')
-        {
-            i++;
-            if (type[i] == 'c')
-            {
-                integer = va_arg(arg, int);
-                ft_putchar(integer, &cont);
-            }
-            else if (type[i] == 's')
-            {
-                s = va_arg(arg, char *);
-                ft_putstr(s, &cont);
-            }
-            else if (type[i] == 'p')
-            {
-                integer = va_arg(arg, int);
-                ft_puthexa(integer, &cont);
-            }
-            else if (type[i] == 'i' || type[i] == 'd')
-            {
-                integer = va_arg(arg, int);
-                ft_putnbr(integer, &cont);
-            }
-            else if (type[i] == 'u')
-            {
-                integer = va_arg(arg, int);
-                ft_putdecimal(integer, &cont);
-            }
-            else if (type[i] == 'x')
-            {
-                integer = va_arg(arg, int);
-                ft_puthexa(integer, &cont);
-            }
-            else if (type[i] == 'X')
-            {
-                integer = va_arg(arg, int);
-                ft_puthexa(integer, &cont);
-            }
-            else
-                ft_putchar(type[i], &cont);
-            i++;
-        }
-    }
-    va_end(arg);
-    return (cont);
-=======
 /// @brief Iterates 'format' to know whether the thing to be printed is 
 /// a character, a string, a decimal or an hexadecimal and if it is valid.
 /// @param format Format of the thing to be printed.
@@ -104,7 +46,6 @@ int	ft_printf(char const *format, ...)
 	}
 	va_end(arg);
 	return (count);
->>>>>>> 5a8cc785945cc64485c43cf87be70bd996045704
 }
 
 /// @brief Checks if the format required is valid.
@@ -115,19 +56,6 @@ int	ft_printf(char const *format, ...)
 /// @return 0 if false 1 if true.
 int	ft_formats(va_list arg, const char *format, int *count, int *i)
 {
-<<<<<<< HEAD
-    //printf("%d", ft_istype("a%  d"));
-    // printf("%c", 'e');
-    // printf("\n%i", ft_printf(" NULL %s NULL ", NULL));
-    // int x = 123;
-    // unsigned int *ptr = &x;
-    // printf("The address is: %p, the value is %d", ptr, *ptr);
-    //ft_printf("ft%p", -1);
-    //printf("print\n%p", -1);
-    // printf(" %x ", 29);
-
-}
-=======
 	t_printf_data	pd;
 
 	if (format[*i] == 'c')
@@ -148,4 +76,3 @@ int	ft_formats(va_list arg, const char *format, int *count, int *i)
 		return (0);
 	return (1);
 }
->>>>>>> 5a8cc785945cc64485c43cf87be70bd996045704
