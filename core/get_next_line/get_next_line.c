@@ -3,101 +3,81 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <fcntl.h>
-# define BUFFER_SIZE 1000
+# define BUFFER_SIZE 100
 
-char *ft_line (char *buffer);
-int	ft_strlen(char *str);
-char *ft_next(char *buffer);
-//char	*ft_strjoin(const char *s1, const char *s2);
+char    *ft_line (char *buffer);
+int     ft_strlen(char *str);
+char    *ft_next(char *buffer);
+char	*ft_strjoin(char *s1, char *s2);
+char	*ft_strchr(const char *s, int c);
 void	*ft_calloc(int count, int size);
 
 char *get_next_line(int fd)
 {
     static char *buffer;
     char *line;
-
-    buffer = ft_calloc(BUFFER_SIZE, sizeof(char));
-    if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
-        return (NULL);
-    read(fd, buffer, BUFFER_SIZE);
-    if (!buffer)
-    {
-        free(buffer);
-        return (NULL);
-    }
-    line = ft_line(buffer);
-    buffer = ft_next(buffer);
-    printf("%s\n%s", "rest:", buffer);
-    return (line);
-}
-
-/*char *ft_read(int fd, char *buffer)
-{
-    char *temp;
+    char *tmp;
+    int found;
     int byte;
 
-    if (!buffer)
-        buffer = ft_calloc(1, 1);
-    temp = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
-    byte = 1;
-    while (byte > 0)
+    found = 0;
+    byte = 0;
+    buffer = (char *) malloc (BUFFER_SIZE * sizeof(char));
+    if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
+        return (NULL);
+    while (found == 0)
     {
-        byte = read(fd, temp, BUFFER_SIZE);
-        if (byte == -1)
+        byte = read(fd, buffer, BUFFER_SIZE);
+        if (!buffer || byte < 0)
         {
-            free(temp);
+            free(buffer);
             return (NULL);
         }
-        //temp[byte] = 0;
-        //buffer = ft_free(buffer, temp);
-        if (ft_strchr(buffer, '\n'))
-            break ;
+        if (ft_strchr(buffer, '\n') != NULL)
+        {
+            line = ft_line(buffer);
+            found = 1;
+        }
+        else
+            tmp = ft_strjoin(line, tmp);
+        buffer = ft_next(buffer);
+        printf("%s\n%s", "Rest:", buffer);
     }
-    free (temp);
-    return (buffer);
-}*/
-
-/*char *ft_free(char *buffer, char *buf)
-{
-    char *temp;
-
-    temp = ft_strjoin(buffer, buf);
-    free(buffer);
-    return (temp);
-}*/
+    return (line);
+}
 
 char *ft_line (char *buffer)
 {
     char *line;
-    int pos;
+    int i;
 
-    pos = 0;
-    while (buffer[pos] && buffer[pos] != '\n')
-        pos++;
-    line = (char *) malloc (pos * sizeof(char));
-    pos = 0;
-    while (buffer[pos] && buffer[pos] != '\n')
+    i = 0;
+    while (buffer[i] && buffer[i] != '\n')
+        i++;
+    line = (char *) malloc (i * sizeof(char));
+    i = 0;
+    while (buffer[i] && buffer[i] != '\n')
     {
-        line[pos] = buffer[pos];
-        pos++;
+        line[i] = buffer[i];
+        i++;
     }
-    line[pos] = '\0';
+    line[i] = '\0';
     return (line);
 }
 
 char *ft_next(char *buffer)
 {
+    int j;
     int i;
-    int pos;
     char *rest;
 
-    i = 0;
-    while (buffer[pos] && buffer[pos] != '\n')
-        pos++;
-    rest = ft_calloc((ft_strlen(buffer) - pos + 1), sizeof(char));
-    pos++;
-    while (buffer[pos])
-        rest[i++] = buffer[pos++];
+    j = 0;
+    while (buffer[i] && buffer[i] != '\n')
+        i++;
+    rest = (char *) malloc ((ft_strlen(buffer) - i + 1) * sizeof(char));
+    i++;
+    while (buffer[i])
+        rest[j++] = buffer[i++];
     free(buffer);
     return (rest);
 }
@@ -106,16 +86,7 @@ char *ft_next(char *buffer)
 int main()
 {
 	int		fd;
-    //char *buffer;
-    char *path = "prueba.dict";
-
-	fd = open(path, O_RDONLY);
-    if (fd >= 0)
-    {
-		//read(fd, buffer, 50);
-        printf("\nLine: %s", get_next_line(fd));
-    }
-	printf("\n%s", "pausa");
-    printf("\n%s", get_next_line(fd));
+	fd = open("prueba.dict", O_RDONLY);
+    printf("\nLine: %s", get_next_line(fd));
     return (0);
 }

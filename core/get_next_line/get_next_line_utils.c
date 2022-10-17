@@ -1,7 +1,6 @@
 #include <stdlib.h>
 void	ft_bzero(void *s, int n);
 
-
 int	ft_strlen(char *str)
 {
 	int	len;
@@ -12,7 +11,7 @@ int	ft_strlen(char *str)
 	return (len);
 }
 
-/*char	*ft_strjoin(const char *s1, const char *s2)
+char	*ft_strjoin(char *s1, char *s2)
 {
 	char	*str;
 	int		i;
@@ -35,7 +34,7 @@ int	ft_strlen(char *str)
 		return (str);
 	}
 	return (0);
-}*/
+}
 
 void	*ft_calloc(int count, int size)
 {
@@ -61,4 +60,21 @@ void	ft_bzero(void *s, int n)
 		str[i] = 0;
 		i++;
 	}
+}
+
+char	*ft_strchr(const char *s, int c)
+{
+	unsigned char	ret;
+
+	ret = (unsigned char)c;
+	if (ret >= 0 && ret <= 255)
+	{
+		while (*s != ret)
+		{
+			if (*s == '\0')
+				return (0);
+			s++;
+		}
+	}
+	return ((char *)s);
 }
