@@ -1,7 +1,9 @@
 #include <stdlib.h>
+#include <stdio.h>
 void	ft_bzero(void *s, int n);
+char	*ft_strdup(char *src);
 
-int	ft_strlen(char *str)
+int	ft_strlen(const char *str)
 {
 	int	len;
 
@@ -17,6 +19,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	int		i;
 
 	i = 0;
+	printf("%s", s2);
 	str = (char *) malloc((ft_strlen(s2) + ft_strlen(s1) + 1) * sizeof(char));
 	if (str && (s1 || s2))
 	{
@@ -77,4 +80,61 @@ char	*ft_strchr(const char *s, int c)
 		}
 	}
 	return ((char *)s);
+}
+
+void	*ft_clean(void *array)
+{
+	char	*str;
+
+	str = (char *) array;
+	free(str);
+	return (NULL);
+}
+
+char	*ft_substr(char const *s, unsigned int start, size_t len)
+{
+	char		*str;
+	size_t		p;
+
+	p = 0;
+	if (ft_strlen(s) < start)
+		return (ft_strdup(""));
+	if (ft_strlen(&s[start]) < len)
+		len = ft_strlen(&s[start]);
+	str = (char *) malloc((len + 1) * sizeof(char));
+	if (str)
+	{
+		while (p < len && s[p + start])
+		{
+			str[p] = s[p + start];
+			p++;
+		}
+		str[p] = '\0';
+		return (str);
+	}
+	else
+	{
+		free(str);
+		return (NULL);
+	}
+}
+
+char	*ft_strdup(char *src)
+{
+	char	*str;
+	int		pos;
+
+	pos = 0;
+	str = NULL;
+	str = (char *) malloc ((ft_strlen(src) + 1) * sizeof(char));
+	if (str)
+	{
+		while (src[pos])
+		{
+			str[pos] = src[pos];
+			pos++;
+		}
+		str[pos] = '\0';
+	}
+	return (str);
 }
