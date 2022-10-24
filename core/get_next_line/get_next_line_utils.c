@@ -1,86 +1,4 @@
-#include <stdlib.h>
-#include <stdio.h>
-void	ft_bzero(void *s, int n);
-char	*ft_strdup(char *src);
-
-int	ft_strlen(const char *str)
-{
-	int	len;
-
-	len = 0;
-	while (str[len])
-		len++;
-	return (len);
-}
-
-char	*ft_strjoin(char *s1, char *s2)
-{
-	char	*str;
-	int		i;
-
-	i = 0;
-	printf("%s", s2);
-	str = (char *) malloc((ft_strlen(s2) + ft_strlen(s1) + 1) * sizeof(char));
-	if (str && (s1 || s2))
-	{
-		while (*s1)
-		{
-			str[i] = *s1++;
-			i++;
-		}
-		while (*s2)
-		{
-			str[i] = *s2++;
-			i++;
-		}
-		str[i] = '\0';
-		return (str);
-	}
-	return (0);
-}
-
-void	*ft_calloc(int count, int size)
-{
-	int		*arr;
-
-	arr = (int *) malloc (count * size);
-	if (arr)
-		ft_bzero(arr, (count * size));
-	return (arr);
-}
-
-void	ft_bzero(void *s, int n)
-{
-	int				zero;
-	int			i;
-	unsigned char	*str;
-
-	str = (unsigned char *)s;
-	i = 0;
-	zero = 0;
-	while (i < n)
-	{
-		str[i] = 0;
-		i++;
-	}
-}
-
-char	*ft_strchr(const char *s, int c)
-{
-	unsigned char	ret;
-
-	ret = (unsigned char)c;
-	if (ret >= 0 && ret <= 255)
-	{
-		while (*s != ret)
-		{
-			if (*s == '\0')
-				return (0);
-			s++;
-		}
-	}
-	return ((char *)s);
-}
+#include "get_next_line.h"
 
 void	*ft_clean(void *array)
 {
@@ -89,6 +7,20 @@ void	*ft_clean(void *array)
 	str = (char *) array;
 	free(str);
 	return (NULL);
+}
+
+void	ft_putchar(char c)
+{
+	write(1, &c, 1);
+}
+
+void	ft_putstr(char *str)
+{
+	while (*str)
+	{
+		ft_putchar(*str);
+		str++;
+	}
 }
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
@@ -117,6 +49,63 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		free(str);
 		return (NULL);
 	}
+}
+
+char	*ft_strjoin(char const *s1, char const *s2)
+{
+	int		total_len;
+	char	*str;
+	int		p;
+
+	p = 0;
+	total_len = ft_strlen(s1) + ft_strlen(s2);
+	str = (char *) malloc((total_len + 1) * sizeof(char));
+	if (str)
+	{
+		while (*s1)
+		{
+			str[p++] = *s1;
+			s1++;
+		}
+		while (*s2)
+		{
+			str[p++] = *s2;
+			s2++;
+		}
+		str[p] = '\0';
+		return (str);
+	}
+	else
+		return (NULL);
+}
+
+size_t	ft_strlen(const char *s)
+{
+	size_t	len;
+
+	len = 0;
+	if (!s)
+		return (0);
+	while (s[len])
+		len++;
+	return (len);
+}
+
+char	*ft_strchr(const char *s, int c)
+{
+	unsigned char	ch;
+
+	ch = (unsigned char) c;
+	if (ch >= 0 && ch <= 255)
+	{
+		while (*s != ch)
+		{
+			if (*s == '\0')
+				return (0);
+			s++;
+		}
+	}
+	return ((char *)s);
 }
 
 char	*ft_strdup(char *src)
