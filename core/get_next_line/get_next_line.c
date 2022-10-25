@@ -6,34 +6,26 @@ char	*get_next_line(int fd)
 	char *str;
 	int byte;
 	
-	//str = NULL;
-	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
+	// if (ft_strlen(buffer) == 0)
+	// 	return (NULL);
+	if (fd < 0 || BUFFER_SIZE <= 0)
         return (NULL);
-	//buffer = ft_read(buffer, byte, fd);
-	if (ft_strlen(buffer) != 0)
-		byte = ft_strlen(buffer);
-	if (ft_strlen(buffer) == 0)
+	if (!buffer)
 	{
 		buffer = (char *) malloc (BUFFER_SIZE * sizeof(char));
 		if (!buffer)
-			return (NULL);
+			return (free (buffer), NULL);
 		byte = read(fd, buffer, BUFFER_SIZE);
 		if (byte <= 0)
-		{
-			free(buffer);
-			return (NULL);
-		}
+			return (free(buffer), NULL);
 	}
-	str = buffer;
-	//str = ft_strdup(buffer);
+	//str = buffer;
+	str = ft_strdup(buffer);
 	while (!ft_strchr(str, '\n') && byte != 0)
 	{
 		byte = read(fd, buffer, BUFFER_SIZE);
 		if (byte < 0)
-		{
-			free(str);
-			return (NULL);
-		}
+			return (free(str), NULL);
 		if (byte > 0)
 			str = ft_strjoin(str, buffer);
 		if (byte == 0)
@@ -41,8 +33,8 @@ char	*get_next_line(int fd)
 	}
 	if (buffer == NULL)
 	{
-		free(buffer);
-		return (str);
+		//buffer[0] == '\n';
+		return (free(buffer), str);
 	}
 	else
 	{
@@ -73,15 +65,15 @@ char	*get_next_line(int fd)
 	system("leaks a.out");
 }*/
 
-// int main(){
-// 	int fd;
-// 	char *path = "prueba.dict";
+int main(){
+	int fd;
+	char *path = "prueba.dict";
 	
-// 	fd = open(path, O_RDONLY);
-// 	printf("Line: %s", get_next_line(fd));
-// 	printf("\nLine: %s", get_next_line(fd));
-// 	printf("\nLine: %s", get_next_line(fd));
-// 	printf("\nLine: %s", get_next_line(fd));
-// 	//atexit(probar);
-// 	//return (0);
-// }
+	fd = open(path, O_RDONLY);
+	printf("Line: %s", get_next_line(fd));
+	printf("\nLine: %s", get_next_line(fd));
+	printf("\nLine: %s", get_next_line(fd));
+	printf("\nLine: %s", get_next_line(fd));
+	//atexit(probar);
+	return (0);
+}
