@@ -2,78 +2,117 @@
 
 char	*get_next_line(int fd)
 {
-	static char *buffer;
-	char *str;
-	int byte;
-	
-	// if (ft_strlen(buffer) == 0)
-	// 	return (NULL);
-	if (fd < 0 || BUFFER_SIZE <= 0)
+    static char *rest = NULL;
+    char *buffer;
+    char *tmp;
+    char *aux;
+    char *line;
+    int byte;
+
+    buffer = NULL;
+    tmp = NULL;
+    if (fd < 0 || BUFFER_SIZE <= 0)
         return (NULL);
-	if (!buffer)
-	{
-		buffer = (char *) malloc (BUFFER_SIZE * sizeof(char));
-		if (!buffer)
-			return (free (buffer), NULL);
-		byte = read(fd, buffer, BUFFER_SIZE);
-		if (byte <= 0)
-			return (free(buffer), NULL);
-	}
-	//str = buffer;
-	str = ft_strdup(buffer);
-	while (!ft_strchr(str, '\n') && byte != 0)
-	{
-		byte = read(fd, buffer, BUFFER_SIZE);
-		if (byte < 0)
-			return (free(str), NULL);
-		if (byte > 0)
-			str = ft_strjoin(str, buffer);
-		if (byte == 0)
-			buffer = NULL;
-	}
-	if (buffer == NULL)
-	{
-		//buffer[0] == '\n';
-		return (free(buffer), str);
-	}
-	else
-	{
-		buffer = ft_strchr(str, '\n');
-		buffer++;
-		if (str[0] == '\n')
-			return (NULL);
-	}
-	return (ft_substr(str, 0, ft_strlen(str) - ft_strlen(buffer) - 1));
+    if (rest)
+    {
+        tmp = ft_strdup(rest);
+        if (!tmp)
+            return (NULL);
+    }
+    while (ft_find(tmp, '\n') == 0)
+    {
+        if (!buffer)
+        {
+            buffer = (char *) malloc ((BUFFER_SIZE + 1) * sizeof(buffer));
+            if (!buffer)
+            {
+                free(buffer);
+                return (NULL);
+            }
+        }
+        byte = read(fd, buffer, BUFFER_SIZE);
+        if (byte <= 0)
+        {
+            if(byte == 0 && tmp != NULL)
+            {
+                free(rest);
+                rest = NULL;
+                free(buffer);
+                return (tmp);
+            }
+            if (tmp)
+                free(tmp);
+            free(buffer);
+            return (NULL);
+        }
+        buffer[byte] = '\0';
+        if (!tmp)
+        {
+            tmp = ft_strdup(buffer);
+            if (!tmp)
+                return (free(buffer), NULL);
+        }
+        else
+        {
+            aux = ft_strjoin(tmp, buffer);
+            // if (!aux)
+            //     return (free(buffer), NULL);
+            free(tmp);
+            tmp = ft_strdup(aux);
+            // if (!tmp)
+            //     return (free(buffer), NULL);
+            free(aux);
+        }
+    }
+    if (buffer)
+        free(buffer);
+    line = ft_getline(tmp);
+    if (rest)
+    {
+        free(rest);
+        rest = NULL;
+    }
+    rest = ft_rest(tmp, '\n'); 
+    free(tmp);
+    // if (!rest && !line)
+    //     return (NULL);
+    return (line);
 }
 
-/*char *ft_read(char *buffer, int byte, int fd)
+char *ft_getline(char *buffer)
 {
-	if (ft_strlen(buffer) == 0)
-	{
-		buffer = (char *) malloc (BUFFER_SIZE * sizeof(char));
-		if (!buffer)
-			return (ft_clean(buffer));
-		byte = read (fd, buffer, BUFFER_SIZE);
-		if (byte <= 0)
-			return (ft_clean(buffer));
-	}
-	return (buffer);
-}*/
+    char *line;
+    int i;
 
-/*void probar(void)
-{
-	system("leaks a.out");
-}*/
-
-int main(){
-	int fd;
-	char *path = "prueba.dict";
-	
-	fd = open(path, O_RDONLY);
-	printf("Line: %s", get_next_line(fd));
-	printf("\nLine: %s", get_next_line(fd));
-	printf("\nLine: %s", get_next_line(fd));
-	printf("\nLine: %s", get_next_line(fd));
-	//atexit(probar);
-	return (0);
+    i = 0;
+    if (!buffer)
+        return (NULL);
+    while (buffer[i] != '\n')
+        i++;
+    line = (char *) malloc ((i + 2) * sizeof(char));
+    if (!line)
+        return (NULL);
+    i = 0;
+    while (buffer[i] != '\n')
+    {
+        line[i] = buffer[i];
+        i++;
+    }
+    line[i++] = '\n';
+    line[i] = '\0';
+    return (line);
 }
+
+// int main()
+// {
+// 	int fd;
+//     int i;
+
+//     i = 1;
+//     int loop = 13;
+// 	char *path = "prueba.dict";
+// 	fd = open(path, O_RDONLY);
+//     for(int j = 0; j < loop; j++)
+// 	    printf("Line %i: %s", i++, get_next_line(fd));
+// 	return (0);
+// }

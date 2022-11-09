@@ -6,18 +6,16 @@
 #ifndef FT_GETNEXTLINE_H
 # define FT_GETNEXTLINE_H
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE BUFSIZ
+#  define BUFFER_SIZE 10
 # endif
 
 char	*get_next_line(int fd);
-void	*ft_clean(void *array);
-void	ft_putchar(char c);
-void	ft_putstr(char *str);
-char	*ft_substr(char const *s, unsigned int start, size_t len);
-char	*ft_strjoin(char const *s1, char const *s2);
-size_t	ft_strlen(const char *s);
-char	*ft_strchr(const char *s, int c);
+int     ft_strlen(char *str);
+int     ft_find(char *s, char c);
+char    *ft_getline(char *buffer);
+char	*ft_strjoin(char *s1, char *s2);
 char	*ft_strdup(char *src);
-//char	*ft_read(char *buffer, int byte, int fd);
+char	*ft_bzero(char *s, int n);
+char *ft_rest(char *s, char c);
 
 #endif
