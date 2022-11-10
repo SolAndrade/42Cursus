@@ -17,5 +17,7 @@ char	*ft_strjoin(char *s1, char *s2);
 char	*ft_strdup(char *src);
 char	*ft_bzero(char *s, int n);
 char *ft_rest(char *s, char c);
+// char *ft_read(int fd);
+char *ft_free(char *tofree);
 
 #endif

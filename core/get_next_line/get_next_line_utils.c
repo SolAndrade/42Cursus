@@ -83,19 +83,6 @@ int	ft_strlen(char *str)
 	return (len);
 }
 
-char	*ft_bzero(char *s, int n)
-{
-	int	i;
-	
-	i = 0;
-	while (i < n)
-	{
-		s[i] = 0;
-		i++;
-	}
-	return (s);
-}
-
 char	*ft_strdup(char *src)
 {
 	char	*str;
@@ -114,4 +101,11 @@ char	*ft_strdup(char *src)
 	}
 	str[i] = '\0';
 	return (str);
+}
+
+char *ft_free(char *tofree)
+{
+    free(tofree);
+    tofree = NULL;
+    return (tofree);
 }

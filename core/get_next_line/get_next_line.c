@@ -26,30 +26,14 @@ char	*get_next_line(int fd)
         byte = read(fd, buffer, BUFFER_SIZE);
         if (byte <= 0)
         {
-            if(byte == 0 && tmp != NULL)
-            {
-                free(rest);
-                rest = NULL;
-                free(buffer);
-                return (tmp);
-            }
-            if (tmp)
-                free(tmp);
-            if (rest)
-            {
-                free(rest);
-                rest = NULL;
-            }
-            free(buffer);
-            return (NULL);
+            rest = ft_free(rest);
+            if(byte == 0 && tmp)
+                return (free(buffer), tmp);
+            return (free(tmp), free(buffer), NULL);
         }
         buffer[byte] = '\0';
         if (!tmp)
-        {
             tmp = ft_strdup(buffer);
-            if (!tmp)
-                return (free(buffer), NULL);
-        }
         else
         {
             aux = ft_strjoin(tmp, buffer);
@@ -61,13 +45,9 @@ char	*get_next_line(int fd)
     }
     line = ft_getline(tmp);
     if (rest)
-    {
-        free(rest);
-        rest = NULL;
-    }
+        rest = ft_free(rest);
     rest = ft_rest(tmp, '\n'); 
-    free(tmp);
-    return (line);
+    return (free(tmp), line);
 }
 
 char *ft_getline(char *buffer)
