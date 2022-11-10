@@ -6,7 +6,7 @@
 #ifndef FT_GETNEXTLINE_H
 # define FT_GETNEXTLINE_H
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 10
+#  define BUFFER_SIZE 5
 # endif
 
 char	*get_next_line(int fd);

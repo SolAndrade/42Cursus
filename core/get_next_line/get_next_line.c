@@ -9,7 +9,6 @@ char	*get_next_line(int fd)
     char *line;
     int byte;
 
-    buffer = NULL;
     tmp = NULL;
     if (fd < 0 || BUFFER_SIZE <= 0)
         return (NULL);
@@ -21,15 +20,9 @@ char	*get_next_line(int fd)
     }
     while (ft_find(tmp, '\n') == 0)
     {
+        buffer = (char *) malloc ((BUFFER_SIZE + 1) * sizeof(buffer));
         if (!buffer)
-        {
-            buffer = (char *) malloc ((BUFFER_SIZE + 1) * sizeof(buffer));
-            if (!buffer)
-            {
-                free(buffer);
-                return (NULL);
-            }
-        }
+            return (free(buffer), NULL);
         byte = read(fd, buffer, BUFFER_SIZE);
         if (byte <= 0)
         {
@@ -42,6 +35,11 @@ char	*get_next_line(int fd)
             }
             if (tmp)
                 free(tmp);
+            if (rest)
+            {
+                free(rest);
+                rest = NULL;
+            }
             free(buffer);
             return (NULL);
         }
@@ -55,17 +53,12 @@ char	*get_next_line(int fd)
         else
         {
             aux = ft_strjoin(tmp, buffer);
-            // if (!aux)
-            //     return (free(buffer), NULL);
             free(tmp);
             tmp = ft_strdup(aux);
-            // if (!tmp)
-            //     return (free(buffer), NULL);
             free(aux);
         }
-    }
-    if (buffer)
         free(buffer);
+    }
     line = ft_getline(tmp);
     if (rest)
     {
@@ -74,8 +67,6 @@ char	*get_next_line(int fd)
     }
     rest = ft_rest(tmp, '\n'); 
     free(tmp);
-    // if (!rest && !line)
-    //     return (NULL);
     return (line);
 }
 
@@ -109,9 +100,8 @@ char *ft_getline(char *buffer)
 //     int i;
 
 //     i = 1;
-//     int loop = 13;
-// 	char *path = "prueba.dict";
-// 	fd = open(path, O_RDONLY);
+//     int loop = 6;
+// 	fd = open("prueba.dict", O_RDONLY);
 //     for(int j = 0; j < loop; j++)
 // 	    printf("Line %i: %s", i++, get_next_line(fd));
 // 	return (0);
