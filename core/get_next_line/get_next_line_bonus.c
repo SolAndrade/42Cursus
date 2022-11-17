@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: soandrad <soandrad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 17:10:17 by soandrad          #+#    #+#             */
-/*   Updated: 2022/11/11 19:32:00 by soandrad         ###   ########.fr       */
+/*   Updated: 2022/11/11 19:35:58 by soandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 typedef struct gnl_data
 {
@@ -22,12 +22,12 @@ typedef struct gnl_data
 
 char	*get_next_line(int fd)
 {
-	static char	*rest = NULL;
+	static char	*rest[4096];
 	t_gnl_data	dt;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	dt.tmp = ft_strdup(rest);
+	dt.tmp = ft_strdup(rest[fd]);
 	while (ft_find(dt.tmp, '\n') == 0)
 	{
 		dt.buffer = (char *) malloc ((BUFFER_SIZE + 1) * sizeof(dt.buffer));
@@ -36,7 +36,7 @@ char	*get_next_line(int fd)
 		dt.byte = read(fd, dt.buffer, BUFFER_SIZE);
 		if (dt.byte <= 0)
 		{
-			rest = ft_free(rest);
+			rest[fd] = ft_free(rest[fd]);
 			if (dt.byte == 0 && dt.tmp)
 				return (free(dt.buffer), dt.tmp);
 			return (free(dt.tmp), free(dt.buffer), NULL);
@@ -44,8 +44,8 @@ char	*get_next_line(int fd)
 		dt.tmp = ft_content(dt.buffer, dt.tmp, dt.byte);
 	}
 	dt.line = ft_getline(dt.tmp);
-	rest = ft_free(rest);
-	rest = ft_rest(dt.tmp, '\n');
+	rest[fd] = ft_free(rest[fd]);
+	rest[fd] = ft_rest(dt.tmp, '\n');
 	return (free(dt.tmp), dt.line);
 }
 

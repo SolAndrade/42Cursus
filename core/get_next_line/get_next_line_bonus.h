@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: soandrad <soandrad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 16:53:58 by soandrad          #+#    #+#             */
-/*   Updated: 2022/11/11 18:20:36 by soandrad         ###   ########.fr       */
+/*   Updated: 2022/11/11 19:12:25 by soandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#ifndef GET_NEXT_LINE_BONUS_H
+# define GET_NEXT_LINE_BONUS_H
 
 # include <fcntl.h>
 # include <stdio.h>
@@ -32,6 +32,5 @@ char	*ft_bzero(char *s, int n);
 char	*ft_rest(char *s, char c);
 char	*ft_free(char *tofree);
 char	*ft_content(char *buffer, char *tmp, int byte);
-// char	*ft_read(int fd, char *rest, char *tmp);
 
 #endif
