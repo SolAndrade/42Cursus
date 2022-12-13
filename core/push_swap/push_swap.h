@@ -26,10 +26,10 @@ void    ft_rotate_stacks(int *astack, int *bstack, int alength, int blength);
 void    ft_rotate_reverse_stacks(int *astack, int *bstack, int alength, int blength);
 
 //-------- Less Than 10 Inputs --------
-void    ft_less_than_ten_inputs(int *astack, int *bstack, int alength, int blength);
+void    ft_less_than_ten_inputs(int *astack, int *bstack, int *alength, int *blength);
 void    ft_three_inputs(int *astack, int alength);
 void    ft_compare_two(int *astack);
-void    ft_five_inputs(int *astack, int alength);
+void    ft_five_inputs(int *astack, int *bstack, int *alength, int *blength);
 
 //Utils
 int     ft_atoi(const char *str);

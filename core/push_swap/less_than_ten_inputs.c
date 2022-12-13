@@ -1,13 +1,16 @@
 #include "push_swap.h"
 
-void    ft_less_than_ten_inputs(int *astack, int *bstack, int alength, int blength)
+void    ft_less_than_ten_inputs(int *astack, int *bstack, int *alength, int *blength)
 {
-    if(alength == 2)
+    // int a_length_aux = *alength;
+    // int b_length_aux = *blength;
+
+    if(*alength == 2)
          ft_compare_two(astack);
-    if(alength == 3)
-        ft_three_inputs(astack, alength);
-    if(alength == 4 || alength == 5)
-        ft_five_inputs(astack, alength);
+    if(*alength == 3)
+        ft_three_inputs(astack, *alength);
+    if(*alength == 4 || *alength == 5)
+        ft_five_inputs(astack, bstack, alength, blength);
 }
 
 void ft_three_inputs(int *astack, int alength)
@@ -26,35 +29,37 @@ void ft_three_inputs(int *astack, int alength)
         ft_compare_two(astack);
 }
 
-void ft_five_inputs(int *astack, int alength)
+void ft_five_inputs(int *astack, int *bstack, int *alength, int *blength)
 {
+    int flag = 1;
+    int a_length_aux = *alength;
+    int b_length_aux = *blength;
+
     ft_compare_two(astack);
-    if(astack[alength - 3] < astack[alength - 4])
+    while(flag == 1)
     {
-        if(astack[alength - 2] < astack[alength - 3])
+        if(astack[1] > astack[2])
         {
-            if(alength == 5)
+            if(astack[1] > astack[3])
+                flag = 0;
+            else
             {
-                ft_rotate_a(astack, alength);
+                ft_rotate_a(astack, *alength);
                 ft_compare_two(astack);
-                if(astack[1] > astack[alength - 1])
-                {
-                    ft_rotate_a(astack, alength);
-                    ft_rotate_a(astack, alength);
-                    ft_compare_two(astack);
-                }
             }
-            else if(alength == 4)
-                ft_rotate_a(astack, alength);
-            ft_compare_two(astack);
         }
-        else if (astack[alength - 3] < astack[alength - 4])
+        else
+            flag = 0;
+    }
+    if(astack[2] > astack[3])
+    {
+        if(*alength == 5)
         {
-            ft_rotate_reverse_a(astack, alength);
-            ft_rotate_reverse_a(astack, alength);
-            ft_compare_two(astack);
-            ft_rotate_reverse_a(astack, alength);
+            ft_rotate_reverse_a(astack, *alength);
+            ft_rotate_reverse_a(astack, *alength);
         }
+        else
+            ft_rotate_reverse_a(astack, *alength);
     }
 }
 
@@ -64,8 +69,9 @@ void ft_compare_two(int *astack)
         ft_swap_a(astack);
 }
 
-// 5 3 5 4 5 2
-// 3 5 4 5 2 1
-// 4 4 2 2 1 3
-// 2 2 1 1 3 4
-// 1 1 3 3 4 5
+// 4 --> 8 6 
+// 8 --> 6 8 
+// 6 --> 7 7 
+// 7 --> 2 2 
+// 2 --> 4 4 
+
