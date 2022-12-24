@@ -24,7 +24,7 @@ int main(int argc, char **argv)
     if (argc <= 6)
         ft_less_than_ten_inputs(astack, bstack, &alength, &blength, &count);
     else
-        ft_sort(astack, bstack, &alength, &blength, &count);
+        ft_sort_new(astack, bstack, &alength, &blength, &count);
     // ft_push_b(astack, bstack, &alength, &blength);
     // ft_print_stacks(astack, bstack, alength, blength);
     // ft_push_a(astack, bstack, &alength, &blength);

@@ -39,6 +39,16 @@ void ft_sort(int *astack, int *bstack, int *alength, int *blength, int *count);
 void ft_position_nbr(int *astack, int *bstack, int *alength, int *blength, int *count);
 void ft_first_or_last(int *astack, int *bstack, int *alength, int *blength, int *count);
 void    ft_order_final(int *astack, int *bstack, int *alength, int *blength, int *count);
+void ft_first_near(int *astack, int *bstack, int *alength, int *blength, int *count);
+
+//-------- Try of Try --------
+void ft_three_inputs_b(int *bstack, int blength, int *count);
+void ft_compare_two_b(int *bstack, int *count);
+void ft_position_nbr_b(int *astack, int *bstack, int *alength, int *blength, int *count);
+int is_minor(int *astack, int *alength, int media);
+void ft_calculate_media(int *astack, int *bstack, int *alength, int *blength, int *count);
+void ft_send_lowest_b(int *astack, int *bstack, int *alength, int *blength, int *count);
+void ft_sort_new(int *astack, int *bstack, int *alength, int *blength, int *count);
 
 //Utils
 int     ft_atoi(const char *str);

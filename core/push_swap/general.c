@@ -3,12 +3,17 @@
 void ft_sort(int *astack, int *bstack, int *alength, int *blength, int *count)
 {
     ft_three_first(astack, bstack, alength, blength, count);
-    ft_print_stacks(astack, bstack, *alength, *blength);
     while(*blength > 0)
     {
         ft_position_nbr(astack, bstack, alength, blength, count);
+        ft_print_stacks(astack, bstack, *alength, *blength);
     }
     ft_order_final(astack, bstack, alength, blength, count);
+}
+
+void ft_sort_new(int *astack, int *bstack, int *alength, int *blength, int *count)
+{
+    ft_send_lowest_b(astack, bstack, alength, blength, count);
 }
 
 void    ft_order_final(int *astack, int *bstack, int *alength, int *blength, int *count)
@@ -57,55 +62,83 @@ void ft_first_or_last(int *astack, int *bstack, int *alength, int *blength, int 
     }
 }
 
+void ft_first_near(int *astack, int *bstack, int *alength, int *blength, int *count)
+{
+    if(astack[0] > bstack[0])
+    {
+        if(astack[0] > bstack[1])
+        {
+            if(astack[0] - bstack[1] < astack[0] - bstack[0])
+                ft_swap_b(bstack, count);
+        }
+        else
+        {
+            if(bstack[1] - astack[0] < astack[0] - bstack[0])
+                ft_swap_b(bstack, count);
+        }
+    }
+    else
+    {
+        if(astack[0] > bstack[1])
+        {
+            if(astack[0] - bstack[1] < bstack[0] - astack[0])
+                ft_swap_b(bstack, count);
+        }
+        else
+        {
+            if(bstack[1] - astack[0] < bstack[0] - astack[0])
+                ft_swap_b(bstack, count);
+        }
+    }
+}
+
 void ft_position_nbr(int *astack, int *bstack, int *alength, int *blength, int *count)
 {
     int pos = -1;
     int i = 0;
-    ft_print_stacks(astack, bstack, *alength, *blength);
+    // printf("begin");
+    ft_first_near(astack, bstack, alength, blength, count);
     if(bstack[0] < astack[0] && bstack[0] > astack[*alength - 1])
         ft_push_a(astack, bstack, alength, blength, count);
-    while (i < *alength && pos == -1)
+    // ft_print_stacks(astack, bstack, *alength, *blength);
+    // ft_first_or_last(astack, bstack, alength, blength, count);
+    if(*blength > 0)
     {
-        if(bstack[0] > astack[i] && bstack[0] < astack[i + 1])
-            pos = i + 1;
-        i++;
-    }
-    if(pos == -1)
-    {
-        i = 0;
-        pos = 0;
-        while(i < *alength)
+        while (i < *alength && pos == -1)
         {
-            if(astack[i] > astack[pos])
-                pos = i;
+            if(bstack[0] > astack[i] && bstack[0] < astack[i + 1])
+                pos = i + 1;
             i++;
         }
-        pos++;
-    }
-    if(pos > *alength / 2)
-    {
-        while(pos < *alength)
+        if(pos == -1)
         {
-            ft_rotate_reverse_a(astack, *alength, count);
+            i = 0;
+            pos = 0;
+            while(i++ < *alength)
+            {
+                if(astack[i] > astack[pos])
+                    pos = i;
+            }
             pos++;
         }
-        ft_push_a(astack, bstack, alength, blength, count);
-    }
-    else
-    {
-        while(pos > 0)
+        if(pos > *alength / 2)
         {
-            ft_rotate_a(astack, *alength, count);
-            pos--;
+            while(pos++ < *alength)
+                ft_rotate_reverse_a(astack, *alength, count);
+            ft_push_a(astack, bstack, alength, blength, count);
         }
-        ft_push_a(astack, bstack, alength, blength, count);
+        else
+        {
+            while(pos-- > 0)
+                ft_rotate_a(astack, *alength, count);
+            ft_push_a(astack, bstack, alength, blength, count);
+        }
     }
 }
 
 int ft_checker(int *astack, int *alength)
 {
-	int i = *alength;
-	i--;
+	int i = *alength - 1;
 	int min = astack[i];
 	i--;
 	while(i > 0)
@@ -118,3 +151,19 @@ int ft_checker(int *astack, int *alength)
 	}
 	return(1);
 }
+
+// void ft_send_lowest(int *astack, int *bstack, int *alength, int *blength, int *count)
+// {
+//     int min = 0;
+//     int max = 0;
+//     int i = 0;
+//     while(i < *alength)
+//     {
+//         if()
+//     }
+//     i = 0;
+//     while(i < *alength)
+//     {
+        
+//     }
+// }

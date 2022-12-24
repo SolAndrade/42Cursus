@@ -57,3 +57,38 @@ void ft_get_min(int *astack, int *alength, int *count)
 			ft_rotate_reverse_a(astack, *alength, count);
 	}
 }
+
+void ft_three_inputs_b(int *bstack, int blength, int *count)
+{
+	if(bstack[0] > bstack[1] && bstack[0] > bstack[2])
+	{
+		if(bstack[1] < bstack[2])
+        {
+            ft_rotate_b(bstack, blength, count);
+            ft_compare_two_b(bstack, count);
+        }
+        ft_rotate_reverse_b(bstack, blength, count);
+	}
+	else if(bstack[1] > bstack[0] && bstack[1] > bstack[2])
+	{
+        if(bstack[0] < bstack[2])
+        {
+		    ft_rotate_reverse_b(bstack, blength, count);
+		    ft_compare_two_b(bstack, count);
+            ft_rotate_reverse_b(bstack, blength, count);
+        }
+        else
+            ft_rotate_b(bstack, blength, count);
+	}
+	else if(bstack[2] > bstack[0] && bstack[2] > bstack[1])
+	{
+        ft_compare_two_b(bstack, count);
+        ft_rotate_reverse_b(bstack, blength, count);
+    }
+}
+
+void ft_compare_two_b(int *bstack, int *count)
+{
+    if(bstack[0] < bstack[1])
+        ft_swap_b(bstack, count);
+}
