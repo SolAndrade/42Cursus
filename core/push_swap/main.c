@@ -10,7 +10,9 @@ int main(int argc, char **argv)
     int i = 0;
     int alength = argc-1;
     int blength = 0;
+    int count;
 
+    count = 0;
     if(argc > 1)
     {
         while(arg < argc)
@@ -20,11 +22,14 @@ int main(int argc, char **argv)
         }
     }
     if (argc <= 6)
-        ft_less_than_ten_inputs(astack, bstack, &alength, &blength);
+        ft_less_than_ten_inputs(astack, bstack, &alength, &blength, &count);
+    else
+        ft_sort(astack, bstack, &alength, &blength, &count);
     // ft_push_b(astack, bstack, &alength, &blength);
     // ft_print_stacks(astack, bstack, alength, blength);
     // ft_push_a(astack, bstack, &alength, &blength);
     ft_print_stacks(astack, bstack, alength, blength);
+    printf("count: %i", count);
 }
 
 void ft_print_stacks(int *astack, int *bstack, int alength, int blength)

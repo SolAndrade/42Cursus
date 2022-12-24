@@ -1,6 +1,6 @@
 #include "push_swap.h"
 
-void ft_swap_stacks(int *astack, int *bstack)
+void ft_swap_stacks(int *astack, int *bstack, int *count)
 {
     int aux;
 
@@ -14,9 +14,10 @@ void ft_swap_stacks(int *astack, int *bstack)
 
     write(1, "ss", 2);
     write(1, "\n", 1);
+    *count = *count + 1;
 }
 
-void ft_rotate_stacks(int *astack, int *bstack, int alength, int blength)
+void ft_rotate_stacks(int *astack, int *bstack, int alength, int blength, int *count)
 {
     int aux;
     int i = 0;
@@ -38,9 +39,10 @@ void ft_rotate_stacks(int *astack, int *bstack, int alength, int blength)
     bstack[i] = aux;
     write(1, "rr", 2);
     write(1, "\n", 1);
+    *count = *count + 1;
 }
 
-void ft_rotate_reverse_stacks(int *astack, int *bstack, int alength, int blength)
+void ft_rotate_reverse_stacks(int *astack, int *bstack, int alength, int blength, int *count)
 {
     int aux;
 
@@ -62,4 +64,5 @@ void ft_rotate_reverse_stacks(int *astack, int *bstack, int alength, int blength
     bstack[0] = aux;
     write(1, "rrr", 3);
     write(1, "\n", 1);
+    *count = *count + 1;
 }

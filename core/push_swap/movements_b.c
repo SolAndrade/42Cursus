@@ -1,6 +1,6 @@
 #include "push_swap.h"
 
-void ft_swap_b(int *bstack)
+void ft_swap_b(int *bstack, int *count)
 {
     int aux;
 
@@ -9,9 +9,10 @@ void ft_swap_b(int *bstack)
     bstack[1] = aux;
     write(1, "sb", 2);
     write(1, "\n", 1);
+    *count = *count + 1;
 }
 
-void ft_rotate_b(int *bstack, int blength)
+void ft_rotate_b(int *bstack, int blength, int *count)
 {
     int aux;
     int i = 0;
@@ -25,9 +26,10 @@ void ft_rotate_b(int *bstack, int blength)
     bstack[i] = aux;
     write(1, "rb", 2);
     write(1, "\n", 1);
+    *count = *count + 1;
 }
 
-void ft_rotate_reverse_b(int *bstack, int blength)
+void ft_rotate_reverse_b(int *bstack, int blength, int *count)
 {
     int aux;
 
@@ -41,9 +43,10 @@ void ft_rotate_reverse_b(int *bstack, int blength)
     bstack[0] = aux;
     write(1, "rrb", 3);
     write(1, "\n", 1);
+    *count = *count + 1;
 }
 
-void ft_push_b(int *astack, int *bstack, int *alength, int *blength)
+void ft_push_b(int *astack, int *bstack, int *alength, int *blength, int *count)
 {
     int aux;
     int i = 0;
@@ -69,4 +72,5 @@ void ft_push_b(int *astack, int *bstack, int *alength, int *blength)
     *blength += 1;
     write(1, "pb", 2);
     write(1, "\n", 1);
+    *count = *count + 1;
 }
