@@ -37,9 +37,8 @@ void ft_three_inputs_a(int *astack, int alength, int *count);
 void ft_three_first(int *astack, int *bstack, int *alength, int *blength, int *count);
 void ft_sort(int *astack, int *bstack, int *alength, int *blength, int *count);
 void ft_position_nbr(int *astack, int *bstack, int *alength, int *blength, int *count);
-void ft_first_or_last(int *astack, int *bstack, int *alength, int *blength, int *count);
 void    ft_order_final(int *astack, int *bstack, int *alength, int *blength, int *count);
-void ft_first_near(int *astack, int *bstack, int *alength, int *blength, int *count);
+void ft_first_near(int *stack_one, int *stack_two, int *count);
 
 //-------- Try of Try --------
 void ft_three_inputs_b(int *bstack, int blength, int *count);
@@ -49,6 +48,8 @@ int is_minor(int *astack, int *alength, int media);
 void ft_calculate_media(int *astack, int *bstack, int *alength, int *blength, int *count);
 void ft_send_lowest_b(int *astack, int *bstack, int *alength, int *blength, int *count);
 void ft_sort_new(int *astack, int *bstack, int *alength, int *blength, int *count);
+int ft_get_media(int *astack, int *alength);
+void    ft_order_final_b(int *astack, int *bstack, int *alength, int *blength, int *count);
 
 //Utils
 int     ft_atoi(const char *str);
@@ -56,6 +57,7 @@ int     ft_atoi(const char *str);
 //For Tests
 void ft_print_stacks(int *astack, int *bstack, int alength, int blength);
 int ft_checker(int *astack, int *alength);
+int ft_checker_b(int *bstack, int *blength);
 
 
 #endif

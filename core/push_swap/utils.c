@@ -71,7 +71,7 @@ void ft_three_inputs_b(int *bstack, int blength, int *count)
 	}
 	else if(bstack[1] > bstack[0] && bstack[1] > bstack[2])
 	{
-        if(bstack[0] < bstack[2])
+        if(bstack[0] > bstack[2])
         {
 		    ft_rotate_reverse_b(bstack, blength, count);
 		    ft_compare_two_b(bstack, count);
@@ -91,4 +91,34 @@ void ft_compare_two_b(int *bstack, int *count)
 {
     if(bstack[0] < bstack[1])
         ft_swap_b(bstack, count);
+}
+
+void ft_first_near(int *stack_one, int *stack_two, int *count)
+{
+    if(stack_one[0] > stack_two[0])
+    {
+        if(stack_one[0] > stack_two[1])
+        {
+            if(stack_one[0] - stack_two[1] < stack_one[0] - stack_two[0])
+                ft_swap_b(stack_two, count);
+        }
+        else
+        {
+            if(stack_two[1] - stack_one[0] < stack_one[0] - stack_two[0])
+                ft_swap_b(stack_two, count);
+        }
+    }
+    else
+    {
+        if(stack_one[0] > stack_two[1])
+        {
+            if(stack_one[0] - stack_two[1] < stack_two[0] - stack_one[0])
+                ft_swap_b(stack_two, count);
+        }
+        else
+        {
+            if(stack_two[1] - stack_one[0] < stack_two[0] - stack_one[0])
+                ft_swap_b(stack_two, count);
+        }
+    }
 }

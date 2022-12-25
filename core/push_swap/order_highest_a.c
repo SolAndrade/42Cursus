@@ -3,10 +3,11 @@
 void ft_sort(int *astack, int *bstack, int *alength, int *blength, int *count)
 {
     ft_three_first(astack, bstack, alength, blength, count);
+    // ft_print_stacks(astack, bstack, *alength, *blength);
     while(*blength > 0)
     {
         ft_position_nbr(astack, bstack, alength, blength, count);
-        ft_print_stacks(astack, bstack, *alength, *blength);
+        // ft_print_stacks(astack, bstack, *alength, *blength);
     }
     ft_order_final(astack, bstack, alength, blength, count);
 }
@@ -41,70 +42,53 @@ void    ft_order_final(int *astack, int *bstack, int *alength, int *blength, int
 void ft_three_first(int *astack, int *bstack, int *alength, int *blength, int *count)
 {
     while (*alength > 3)
+    {
+        // ft_position_nbr_b(astack, bstack, alength, blength, count);
         ft_push_b(astack, bstack, alength, blength, count);
+    }
     ft_three_inputs_a(astack, *alength, count);
 }
 
-void ft_first_or_last(int *astack, int *bstack, int *alength, int *blength, int *count)
-{
-    int flag = 0;
-    while(flag == 0)
-    {
-        if(bstack[0] < astack[0])
-            ft_push_a(astack, bstack, alength, blength, count);
-        else if(bstack[0] > astack[*alength - 1])
-        {
-            ft_push_a(astack, bstack, alength, blength, count);
-            ft_rotate_a(astack, *alength, count);
-        }
-        else
-            flag = 1;
-    }
-}
-
-void ft_first_near(int *astack, int *bstack, int *alength, int *blength, int *count)
-{
-    if(astack[0] > bstack[0])
-    {
-        if(astack[0] > bstack[1])
-        {
-            if(astack[0] - bstack[1] < astack[0] - bstack[0])
-                ft_swap_b(bstack, count);
-        }
-        else
-        {
-            if(bstack[1] - astack[0] < astack[0] - bstack[0])
-                ft_swap_b(bstack, count);
-        }
-    }
-    else
-    {
-        if(astack[0] > bstack[1])
-        {
-            if(astack[0] - bstack[1] < bstack[0] - astack[0])
-                ft_swap_b(bstack, count);
-        }
-        else
-        {
-            if(bstack[1] - astack[0] < bstack[0] - astack[0])
-                ft_swap_b(bstack, count);
-        }
-    }
-}
+// void ft_first_near(int *astack, int *bstack, int *alength, int *blength, int *count)
+// {
+//     if(astack[0] > bstack[0])
+//     {
+//         if(astack[0] > bstack[1])
+//         {
+//             if(astack[0] - bstack[1] < astack[0] - bstack[0])
+//                 ft_swap_b(bstack, count);
+//         }
+//         else
+//         {
+//             if(bstack[1] - astack[0] < astack[0] - bstack[0])
+//                 ft_swap_b(bstack, count);
+//         }
+//     }
+//     else
+//     {
+//         if(astack[0] > bstack[1])
+//         {
+//             if(astack[0] - bstack[1] < bstack[0] - astack[0])
+//                 ft_swap_b(bstack, count);
+//         }
+//         else
+//         {
+//             if(bstack[1] - astack[0] < bstack[0] - astack[0])
+//                 ft_swap_b(bstack, count);
+//         }
+//     }
+// }
 
 void ft_position_nbr(int *astack, int *bstack, int *alength, int *blength, int *count)
 {
     int pos = -1;
     int i = 0;
-    // printf("begin");
-    ft_first_near(astack, bstack, alength, blength, count);
-    if(bstack[0] < astack[0] && bstack[0] > astack[*alength - 1])
+    ft_first_near(astack, bstack, count);
+    while(bstack[0] < astack[0] && bstack[0] > astack[*alength - 1])
         ft_push_a(astack, bstack, alength, blength, count);
-    // ft_print_stacks(astack, bstack, *alength, *blength);
-    // ft_first_or_last(astack, bstack, alength, blength, count);
     if(*blength > 0)
     {
-        while (i < *alength && pos == -1)
+        while (i < (*alength - 1) && pos == -1)
         {
             if(bstack[0] > astack[i] && bstack[0] < astack[i + 1])
                 pos = i + 1;
@@ -114,25 +98,37 @@ void ft_position_nbr(int *astack, int *bstack, int *alength, int *blength, int *
         {
             i = 0;
             pos = 0;
-            while(i++ < *alength)
+            while(i < *alength)
             {
                 if(astack[i] > astack[pos])
                     pos = i;
+                i++;
             }
-            pos++;
+            if(bstack[0] < astack[pos])
+            {
+                pos = 0;
+                i = 0;
+                while(i < *alength)
+                {
+                    if(astack[i] < astack[pos])
+                        pos = i;
+                    i++;
+                }
+            }
+            else
+                pos++;
         }
         if(pos > *alength / 2)
         {
             while(pos++ < *alength)
                 ft_rotate_reverse_a(astack, *alength, count);
-            ft_push_a(astack, bstack, alength, blength, count);
         }
         else
         {
             while(pos-- > 0)
                 ft_rotate_a(astack, *alength, count);
-            ft_push_a(astack, bstack, alength, blength, count);
         }
+        ft_push_a(astack, bstack, alength, blength, count);
     }
 }
 
@@ -141,7 +137,7 @@ int ft_checker(int *astack, int *alength)
 	int i = *alength - 1;
 	int min = astack[i];
 	i--;
-	while(i > 0)
+	while(i >= 0)
 	{
 		if(astack[i] > min)
 			return(0);
