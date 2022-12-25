@@ -68,11 +68,7 @@ void ft_calculate_media(int *astack, int *bstack, int *alength, int *blength, in
                 if(astack[0] > bstack[0] && astack[0] < bstack[*blength - 1])
                     ft_push_b(astack, bstack, alength, blength, count);
                 else
-                {
-                    // if(astack[1] <= media)
-                    //     ft_first_near(bstack, astack, count);
                     ft_position_nbr_b(astack, bstack, alength, blength, count);
-                }
             }
         }
         else
@@ -82,6 +78,7 @@ void ft_calculate_media(int *astack, int *bstack, int *alength, int *blength, in
     }
     if(*blength > 1)
         ft_order_final_b(astack, bstack, alength, blength, count);
+    // ft_print_stacks(astack, bstack, *alength, *blength);
     ft_sort(astack, bstack, alength, blength, count);
 }
 

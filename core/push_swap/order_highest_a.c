@@ -7,7 +7,7 @@ void ft_sort(int *astack, int *bstack, int *alength, int *blength, int *count)
     while(*blength > 0)
     {
         ft_position_nbr(astack, bstack, alength, blength, count);
-        // ft_print_stacks(astack, bstack, *alength, *blength);
+        ft_print_stacks(astack, bstack, *alength, *blength);
     }
     ft_order_final(astack, bstack, alength, blength, count);
 }
@@ -49,41 +49,12 @@ void ft_three_first(int *astack, int *bstack, int *alength, int *blength, int *c
     ft_three_inputs_a(astack, *alength, count);
 }
 
-// void ft_first_near(int *astack, int *bstack, int *alength, int *blength, int *count)
-// {
-//     if(astack[0] > bstack[0])
-//     {
-//         if(astack[0] > bstack[1])
-//         {
-//             if(astack[0] - bstack[1] < astack[0] - bstack[0])
-//                 ft_swap_b(bstack, count);
-//         }
-//         else
-//         {
-//             if(bstack[1] - astack[0] < astack[0] - bstack[0])
-//                 ft_swap_b(bstack, count);
-//         }
-//     }
-//     else
-//     {
-//         if(astack[0] > bstack[1])
-//         {
-//             if(astack[0] - bstack[1] < bstack[0] - astack[0])
-//                 ft_swap_b(bstack, count);
-//         }
-//         else
-//         {
-//             if(bstack[1] - astack[0] < bstack[0] - astack[0])
-//                 ft_swap_b(bstack, count);
-//         }
-//     }
-// }
-
 void ft_position_nbr(int *astack, int *bstack, int *alength, int *blength, int *count)
 {
     int pos = -1;
     int i = 0;
-    ft_first_near(astack, bstack, count);
+    if(*blength > 1)
+        ft_first_near(astack, bstack, count);
     while(bstack[0] < astack[0] && bstack[0] > astack[*alength - 1])
         ft_push_a(astack, bstack, alength, blength, count);
     if(*blength > 0)
