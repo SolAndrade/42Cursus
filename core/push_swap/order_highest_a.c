@@ -7,7 +7,7 @@ void ft_sort(int *astack, int *bstack, int *alength, int *blength, int *count)
     while(*blength > 0)
     {
         ft_position_nbr(astack, bstack, alength, blength, count);
-        ft_print_stacks(astack, bstack, *alength, *blength);
+        // ft_print_stacks(astack, bstack, *alength, *blength);
     }
     ft_order_final(astack, bstack, alength, blength, count);
 }

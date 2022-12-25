@@ -33,23 +33,30 @@ void ft_compare_two_a(int *astack, int *count);
 void ft_four_five_inputs(int *astack, int *bstack, int *alength, int *blength, int *count);
 void ft_three_inputs_a(int *astack, int alength, int *count);
 
-//-------- New Try --------
+//-------- This Works--------
 void ft_three_first(int *astack, int *bstack, int *alength, int *blength, int *count);
 void ft_sort(int *astack, int *bstack, int *alength, int *blength, int *count);
 void ft_position_nbr(int *astack, int *bstack, int *alength, int *blength, int *count);
 void    ft_order_final(int *astack, int *bstack, int *alength, int *blength, int *count);
 void ft_first_near(int *stack_one, int *stack_two, int *count);
-
-//-------- Try of Try --------
 void ft_three_inputs_b(int *bstack, int blength, int *count);
 void ft_compare_two_b(int *bstack, int *count);
 void ft_position_nbr_b(int *astack, int *bstack, int *alength, int *blength, int *count);
 int is_minor(int *astack, int *alength, int media);
-void ft_calculate_media(int *astack, int *bstack, int *alength, int *blength, int *count);
 void ft_send_lowest_b(int *astack, int *bstack, int *alength, int *blength, int *count);
 void ft_sort_new(int *astack, int *bstack, int *alength, int *blength, int *count);
-int ft_get_media(int *astack, int *alength);
 void    ft_order_final_b(int *astack, int *bstack, int *alength, int *blength, int *count);
+
+//-------- This Actually works--------
+void ft_order_by_stacks_b(int *astack, int *bstack, int *alength, int *blength, int *count);
+void ft_three_first_not_so_order_b(int *bstack, int blength, int *count);
+int ft_get_min_for_media(int *astack, int *alength);
+int ft_get_media(int *astack, int *alength);
+
+// ------------ OLD ----------
+int ft_get_media_old(int *astack, int *alength);
+void ft_calculate_media(int *astack, int *bstack, int *alength, int *blength, int *count);
+
 
 //Utils
 int     ft_atoi(const char *str);
