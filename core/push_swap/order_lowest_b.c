@@ -13,11 +13,18 @@ void ft_order_by_stacks_b(int *astack, int *bstack, int *alength, int *blength, 
     int stack_media;
     int i = 0;
     int minorpos;
+    int loop;
 
     stack_media = ft_get_min_for_media(astack, alength);
     main_media = ft_get_media(astack, alength);
     media = stack_media + main_media;
-    while(media <= stack_media + (main_media * 3))
+    if(*alength <= 90)
+        loop = stack_media + (main_media * 3);
+    else if(*alength <= 300)
+        loop = stack_media + (main_media * 5);
+    else
+        loop = stack_media + (main_media * 13);
+    while(media <= loop)
     {
         // printf("media: %i\n", media);
         while(is_minor(astack, alength, media) > -1)
@@ -80,16 +87,13 @@ int ft_get_media(int *astack, int *alength)
             max = astack[i];
         i++;
     }
-    if(min < 0)
-    {
-        if(max < 0)
-            media = ((min - max) / 2) + max;
-        else
-            media = min + max;
-    }
+    if(*alength <= 90)
+        media = (max - min) / 4;
+    else if(*alength <= 300)
+        media = (max - min) / 6;
     else
-        media = (max - min) / 2;
-    media = (max - min) / 4;
+        media = (max - min) / 14;
+    // media = (max - min) / 4;
     return(media);
 }
 
