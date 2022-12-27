@@ -21,7 +21,7 @@ void ft_order_by_stacks_b(int *astack, int *bstack, int *alength, int *blength, 
     main_media = ft_get_media(astack, alength);
     media = stack_media + main_media;
     if(*alength <= 100)
-        loop = stack_media + (main_media * 3);
+        loop = stack_media + (main_media * 2);
     else if(*alength <= 300)
         loop = stack_media + (main_media * 5);
     else
@@ -84,44 +84,46 @@ void ft_order_by_stacks_b(int *astack, int *bstack, int *alength, int *blength, 
     ft_sort(astack, bstack, alength, blength, count);
 }
 
-int ft_get_media(int *astack, int *alength)
+int ft_get_media(int *stack, int *length)
 {
     int media;
     int i = 1;
-    int min = astack[0];
-    int max = astack[0];
+    int min = stack[0];
+    int max = stack[0];
 
-    while(i < *alength)
+    while(i < *length)
     {
-        if(astack[i] < min)
-            min = astack[i];
+        if(stack[i] < min)
+            min = stack[i];
         i++;
     }
     i = 1;
-    while(i < *alength)
+    while(i < *length)
     {
-        if(astack[i] > max)
-            max = astack[i];
+        if(stack[i] > max)
+            max = stack[i];
         i++;
     }
-    if(*alength <= 100)
+    printf("max %i\n", max);
+    printf("min %i\n", min);
+    if(*length <= 100)
         media = (max - min) / 4;
-    else if(*alength <= 300)
+    else if(*length <= 300)
         media = (max - min) / 6;
     else
         media = (max - min) / 11;
     return(media);
 }
 
-int ft_get_min_for_media(int *astack, int *alength)
+int ft_get_min_for_media(int *stack, int *length)
 {
     int i = 1;
-    int min = astack[0];
+    int min = stack[0];
 
-    while(i < *alength)
+    while(i < *length)
     {
-        if(astack[i] < min)
-            min = astack[i];
+        if(stack[i] < min)
+            min = stack[i];
         i++;
     }
     return(min);

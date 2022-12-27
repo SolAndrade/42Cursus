@@ -55,10 +55,12 @@ int ft_get_media(int *astack, int *alength);
 
 // ------------- New Try -----------------
 int get_pos_nbr_b(int *astack, int *bstack, int *blength);
+// void ft_order_by_stacks_a(int *astack, int *bstack, int *alength, int *blength, int *count);
+int get_pos_nbr_a(int *astack, int *bstack, int *alength, int *blength);
+void ft_order_by_stacks_a(int *astack, int *bstack, int *alength, int *blength, int *count);
 
 // ------------ OLD ----------
 int ft_get_media_old(int *astack, int *alength);
-void ft_calculate_media(int *astack, int *bstack, int *alength, int *blength, int *count);
 
 
 //Utils
