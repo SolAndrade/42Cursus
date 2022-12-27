@@ -14,34 +14,51 @@ void ft_order_by_stacks_b(int *astack, int *bstack, int *alength, int *blength, 
     int i = 0;
     int minorpos;
     int loop;
+    int pos_a;
+    int pos_b;
 
     stack_media = ft_get_min_for_media(astack, alength);
     main_media = ft_get_media(astack, alength);
     media = stack_media + main_media;
-    if(*alength <= 90)
+    if(*alength <= 100)
         loop = stack_media + (main_media * 3);
     else if(*alength <= 300)
         loop = stack_media + (main_media * 5);
     else
-        loop = stack_media + (main_media * 13);
+        loop = stack_media + (main_media * 10);
     while(media <= loop)
     {
         // printf("media: %i\n", media);
         while(is_minor(astack, alength, media) > -1)
         {
-            // optimiza pero no tanto -------------------------------
-            minorpos = is_minor(astack, alength, media);
-            if(minorpos > *alength / 2)
+            pos_a = is_minor(astack, alength, media);
+            pos_b = get_pos_nbr_b(astack, bstack, blength);
+            if(pos_a > 0 && pos_b > 0)
             {
-                while(minorpos++ < *alength)
-                    ft_rotate_reverse_a(astack, *alength, count);
+                if(pos_a > *alength / 2 && pos_b > *blength / 2)
+                {
+                    while(pos_a++ < *alength && pos_b++ < *blength)
+                        ft_rotate_reverse_stacks(astack, bstack, *alength, *blength, count);
+                }
+                else if(pos_a <= *alength / 2 && pos_b <= *blength / 2)
+                {
+                    while(pos_a-- > 0 && pos_b-- > 0)
+                        ft_rotate_stacks(astack, bstack, *alength, *blength, count);
+                }
             }
             else
             {
-                while(minorpos-- > 0)
-                    ft_rotate_a(astack, *alength, count);
+                if(pos_a > *alength / 2)
+                {
+                    while(pos_a++ < *alength)
+                        ft_rotate_reverse_a(astack, *alength, count);
+                }
+                else
+                {
+                    while(pos_a-- > 0)
+                        ft_rotate_a(astack, *alength, count);
+                }
             }
-            // ------------------------------------------------------
             if(astack[0] <= media)
             {
                 if(*blength < 3)
@@ -87,13 +104,12 @@ int ft_get_media(int *astack, int *alength)
             max = astack[i];
         i++;
     }
-    if(*alength <= 90)
+    if(*alength <= 100)
         media = (max - min) / 4;
     else if(*alength <= 300)
         media = (max - min) / 6;
     else
-        media = (max - min) / 14;
-    // media = (max - min) / 4;
+        media = (max - min) / 11;
     return(media);
 }
 
