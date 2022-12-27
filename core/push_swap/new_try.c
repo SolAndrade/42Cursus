@@ -76,37 +76,65 @@ int get_pos_nbr_a(int *astack, int *bstack, int *alength, int *blength)
     return(pos);
 }
 
+int ft_is_minor_a(int *bstack, int *blength, int media, int starting)
+{
+    int i = 0;
+    int from_up = -1;
+    int from_down = -1;
+
+    while(i < *blength && from_up == -1)
+    {
+        if(bstack[i] <= media && bstack[i] > starting)
+            from_up = i;
+        i++;
+    }
+    i = *blength;
+    if(from_up == -1)
+        return(-1);
+    while(i > 0 && from_down == -1)
+    {
+        if(bstack[i] <= media && bstack[i] > starting)
+            from_down = i;
+        i--;
+    }
+    if(*blength - from_down < from_up)
+        return(from_down);
+    else
+        return(from_up);
+    return(-1);
+}
+
 void ft_order_by_stacks_a(int *astack, int *bstack, int *alength, int *blength, int *count)
 {
     int main_media;
     int media;
     int min_b;
+    int max_b;
     int i = 0;
     int minorpos;
-    int loop;
     int pos_a;
     int pos_b;
+    int starting;
 
     // ft_print_stacks(astack, bstack, *alength, *blength);
-    min_b = ft_get_min_for_media(bstack, blength);
+    max_b = ft_get_max(bstack, blength);
+    // printf("max_b: %i\n", max_b);
+    min_b = ft_get_min(bstack, blength);
     printf("min_b: %i\n", min_b);
     main_media = ft_get_media(bstack, blength);
     printf("main_media: %i\n", main_media);
-    media = min_b + (main_media * 3);
-    printf("media: %i\n", media);
-    if(*alength <= 100)
-        loop = min_b + (main_media * 4);
-    else if(*alength <= 300)
-        loop = min_b + (main_media * 5);
-    else
-        loop = min_b + (main_media * 10);
-    printf("loop %i\n", loop);
-    while(*blength > 0)
+    starting = min_b + (main_media * 2);
+    printf("starting: %i\n", starting);
+    media = starting + main_media;
+    // printf("media: %i\n", media);
+    while(media <= max_b)
     {
         // printf("media: %i\n", media);
-        while(is_minor(bstack, blength, media) > -1)
+        // printf("is_minor_a: %i", ft_is_minor_a(bstack, blength, media, media - main_media));
+        // ft_print_stacks(astack, bstack, *alength, *blength);
+        while(ft_is_minor_a(bstack, blength, media, starting) > -1)
         {
-            pos_b = is_minor(bstack, blength, media);
+            pos_b = ft_is_minor_a(bstack, blength, media, starting);
             pos_a = get_pos_nbr_a(astack, bstack, alength, blength);
             if(pos_a > 0 && pos_b > 0)
             {
@@ -140,7 +168,7 @@ void ft_order_by_stacks_a(int *astack, int *bstack, int *alength, int *blength, 
                     ft_push_a(astack, bstack, alength, blength, count);
                 else
                 {
-                    if(bstack[0] > astack[0] && bstack[0] < astack[*alength - 1])
+                    if(bstack[0] < astack[0] && bstack[0] > astack[*alength - 1])
                         ft_push_a(astack, bstack, alength, blength, count);
                     else
                         ft_position_nbr(astack, bstack, alength, blength, count);
@@ -151,9 +179,12 @@ void ft_order_by_stacks_a(int *astack, int *bstack, int *alength, int *blength, 
             if(*alength == 3)
                 ft_three_inputs_a(astack, *alength, count);
         }
-        ft_print_stacks(astack, bstack, *alength, *blength);
+        ft_order_final(astack, bstack, alength, blength, count);
+        // ft_print_stacks(astack, bstack, *alength, *blength);
         media = media + main_media;
     }
+    // ft_print_stacks(astack, bstack, *alength, *blength);
+    ft_order_final(astack, bstack, alength, blength, count);
     while(*blength > 0)
-        ft_position_nbr(astack, bstack, alength, blength, count);
+        ft_push_a(astack, bstack, alength, blength, count);
 }

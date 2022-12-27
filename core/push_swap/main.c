@@ -22,7 +22,7 @@ int main(int argc, char **argv)
         }
     }
     if (argc <= 6)
-        ft_less_than_ten_inputs(astack, bstack, &alength, &blength, &count);
+        ft_five_or_less_inputs(astack, bstack, &alength, &blength, &count);
     else
         ft_sort_new(astack, bstack, &alength, &blength, &count);
     // ft_push_b(astack, bstack, &alength, &blength);

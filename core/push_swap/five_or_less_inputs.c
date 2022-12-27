@@ -1,6 +1,6 @@
 #include "push_swap.h"
 
-void    ft_less_than_ten_inputs(int *astack, int *bstack, int *alength, int *blength, int *count)
+void    ft_five_or_less_inputs(int *astack, int *bstack, int *alength, int *blength, int *count)
 {
 	if(*alength == 2)
 		 ft_compare_two_a(astack, count);
@@ -28,11 +28,11 @@ void ft_three_inputs_a(int *astack, int alength, int *count)
 
 void ft_four_five_inputs(int *astack, int *bstack, int *alength, int *blength, int *count)
 {
-	ft_get_max(astack, alength, count);
+	ft_get_and_position_max_five_inputs(astack, alength, count);
 	ft_push_b(astack, bstack, alength, blength, count);
 	if(*alength == 4)
 	{
-		ft_get_min(astack, alength, count);
+		ft_get_and_position_min_five_inputs(astack, alength, count);
 		ft_push_b(astack, bstack, alength, blength, count);
 		ft_three_inputs_a(astack, *alength, count);
 		ft_push_a(astack, bstack, alength, blength, count);

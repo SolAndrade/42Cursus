@@ -2,7 +2,6 @@
 
 void ft_send_lowest_b(int *astack, int *bstack, int *alength, int *blength, int *count)
 {
-    // ft_calculate_media(astack, bstack, alength, blength, count);
     ft_order_by_stacks_b(astack, bstack, alength, blength, count);
 }
 
@@ -10,23 +9,18 @@ void ft_order_by_stacks_b(int *astack, int *bstack, int *alength, int *blength, 
 {
     int main_media;
     int media;
-    int stack_media;
+    int min_a;
     int i = 0;
     int minorpos;
-    int loop;
     int pos_a;
     int pos_b;
+    int max_a;
 
-    stack_media = ft_get_min_for_media(astack, alength);
+    max_a = ft_get_max(astack, alength);
+    min_a = ft_get_min(astack, alength);
     main_media = ft_get_media(astack, alength);
-    media = stack_media + main_media;
-    if(*alength <= 100)
-        loop = stack_media + (main_media * 2);
-    else if(*alength <= 300)
-        loop = stack_media + (main_media * 5);
-    else
-        loop = stack_media + (main_media * 10);
-    while(media <= loop)
+    media = min_a + main_media;
+    while(media <= (min_a + (main_media * 2)))
     {
         // printf("media: %i\n", media);
         while(is_minor(astack, alength, media) > -1)
@@ -84,51 +78,6 @@ void ft_order_by_stacks_b(int *astack, int *bstack, int *alength, int *blength, 
     ft_sort(astack, bstack, alength, blength, count);
 }
 
-int ft_get_media(int *stack, int *length)
-{
-    int media;
-    int i = 1;
-    int min = stack[0];
-    int max = stack[0];
-
-    while(i < *length)
-    {
-        if(stack[i] < min)
-            min = stack[i];
-        i++;
-    }
-    i = 1;
-    while(i < *length)
-    {
-        if(stack[i] > max)
-            max = stack[i];
-        i++;
-    }
-    printf("max %i\n", max);
-    printf("min %i\n", min);
-    if(*length <= 100)
-        media = (max - min) / 4;
-    else if(*length <= 300)
-        media = (max - min) / 6;
-    else
-        media = (max - min) / 11;
-    return(media);
-}
-
-int ft_get_min_for_media(int *stack, int *length)
-{
-    int i = 1;
-    int min = stack[0];
-
-    while(i < *length)
-    {
-        if(stack[i] < min)
-            min = stack[i];
-        i++;
-    }
-    return(min);
-}
-
 void ft_three_first_not_so_order_b(int *bstack, int blength, int *count)
 {
 	if(bstack[0] > bstack[1] && bstack[0] > bstack[2])
@@ -154,13 +103,28 @@ void ft_three_first_not_so_order_b(int *bstack, int blength, int *count)
 int is_minor(int *astack, int *alength, int media)
 {
     int i = 0;
+    int from_up = -1;
+    int from_down = -1;
 
-    while(i < *alength)
+    while(i < *alength && from_up == -1)
     {
         if(astack[i] <= media)
-            return (i);
+            from_up = i;
         i++;
     }
+    i = *alength;
+    if(from_up == -1)
+        return(-1);
+    while(i > 0 && from_down == -1)
+    {
+        if(astack[i] <= media)
+            from_down = i;
+        i--;
+    }
+    if(*alength - from_down < from_up)
+        return(from_down);
+    else
+        return(from_up);
     return(-1);
 }
 

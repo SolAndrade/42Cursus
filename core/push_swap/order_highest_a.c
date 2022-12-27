@@ -2,7 +2,9 @@
 
 void ft_sort(int *astack, int *bstack, int *alength, int *blength, int *count)
 {
-    ft_three_first(astack, bstack, alength, blength, count);
+    // ft_three_first(astack, bstack, alength, blength, count);
+    while(*alength > 0)
+        ft_push_b(astack, bstack, alength, blength, count);
     // ft_print_stacks(astack, bstack, *alength, *blength);
     ft_order_by_stacks_a(astack, bstack, alength, blength, count);
     // while(*blength > 0)
