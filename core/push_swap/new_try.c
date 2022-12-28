@@ -1,5 +1,7 @@
 #include "push_swap.h"
 
+//falta gestionar la ida de la mitad de los numeros cuando hay 500 inputs
+
 int get_pos_nbr_b(int *astack, int *bstack, int *blength)
 {
     int pos = -1;
@@ -89,6 +91,7 @@ int ft_is_minor_a(int *bstack, int *blength, int media, int starting)
         i++;
     }
     i = *blength;
+    i--;
     if(from_up == -1)
         return(-1);
     while(i > 0 && from_down == -1)
@@ -116,25 +119,28 @@ void ft_order_by_stacks_a(int *astack, int *bstack, int *alength, int *blength, 
     int pos_b;
     int starting;
 
-    // ft_print_stacks(astack, bstack, *alength, *blength);
+    ft_print_stacks(astack, bstack, *alength, *blength);
     max_b = ft_get_max(bstack, blength);
-    // printf("max_b: %i\n", max_b);
+    printf("max_b: %i\n", max_b);
     min_b = ft_get_min(bstack, blength);
     printf("min_b: %i\n", min_b);
     main_media = ft_get_media(bstack, blength);
     printf("main_media: %i\n", main_media);
     starting = min_b + (main_media * 2);
     printf("starting: %i\n", starting);
-    media = starting + main_media;
+    // media = starting + main_media; ----
+    media = max_b;
     // printf("media: %i\n", media);
-    while(media <= max_b)
+    // while(media <= max_b) ----
+    while(media >= starting)
     {
         // printf("media: %i\n", media);
-        // printf("is_minor_a: %i", ft_is_minor_a(bstack, blength, media, media - main_media));
-        // ft_print_stacks(astack, bstack, *alength, *blength);
-        while(ft_is_minor_a(bstack, blength, media, starting) > -1)
+        printf("is_minor_a: %i", ft_is_minor_a(bstack, blength, media, media - main_media));
+        // while(ft_is_minor_a(bstack, blength, media, starting) > -1) ----
+        while(ft_is_minor_a(bstack, blength, media, media - main_media) > -1)
         {
-            pos_b = ft_is_minor_a(bstack, blength, media, starting);
+            // pos_b = ft_is_minor_a(bstack, blength, media, starting); ----
+            pos_b = ft_is_minor_a(bstack, blength, media, media - main_media);
             pos_a = get_pos_nbr_a(astack, bstack, alength, blength);
             if(pos_a > 0 && pos_b > 0)
             {
@@ -162,6 +168,7 @@ void ft_order_by_stacks_a(int *astack, int *bstack, int *alength, int *blength, 
                         ft_rotate_b(bstack, *blength, count);
                 }
             }
+            // if(bstack[0] <= media) ----
             if(bstack[0] <= media)
             {
                 if(*alength < 3)
@@ -180,10 +187,11 @@ void ft_order_by_stacks_a(int *astack, int *bstack, int *alength, int *blength, 
                 ft_three_inputs_a(astack, *alength, count);
         }
         ft_order_final(astack, bstack, alength, blength, count);
-        // ft_print_stacks(astack, bstack, *alength, *blength);
-        media = media + main_media;
+        ft_print_stacks(astack, bstack, *alength, *blength);
+        // media = media + main_media; ----
+        media = media - main_media;
     }
-    // ft_print_stacks(astack, bstack, *alength, *blength);
+    ft_print_stacks(astack, bstack, *alength, *blength);
     ft_order_final(astack, bstack, alength, blength, count);
     while(*blength > 0)
         ft_push_a(astack, bstack, alength, blength, count);

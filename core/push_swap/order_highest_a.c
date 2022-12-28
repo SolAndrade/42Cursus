@@ -12,7 +12,7 @@ void ft_sort(int *astack, int *bstack, int *alength, int *blength, int *count)
     //     ft_position_nbr(astack, bstack, alength, blength, count);
     //     // ft_print_stacks(astack, bstack, *alength, *blength);
     // }
-    // ft_order_final(astack, bstack, alength, blength, count);
+    ft_order_final(astack, bstack, alength, blength, count);
 }
 
 void ft_sort_new(int *astack, int *bstack, int *alength, int *blength, int *count)

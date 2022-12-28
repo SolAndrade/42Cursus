@@ -25,7 +25,9 @@ void ft_order_by_stacks_b(int *astack, int *bstack, int *alength, int *blength, 
         // printf("media: %i\n", media);
         while(is_minor(astack, alength, media) > -1)
         {
+            // printf("is_minor_b: %i", is_minor(astack, alength, media));
             pos_a = is_minor(astack, alength, media);
+            // printf("is_minor_b %i", pos_a);
             pos_b = get_pos_nbr_b(astack, bstack, blength);
             if(pos_a > 0 && pos_b > 0)
             {
@@ -112,7 +114,10 @@ int is_minor(int *astack, int *alength, int media)
             from_up = i;
         i++;
     }
+    // printf("from_up: %i", from_up);
     i = *alength;
+    i--;
+    // printf("alength: %i\n", *alength);
     if(from_up == -1)
         return(-1);
     while(i > 0 && from_down == -1)
@@ -121,6 +126,7 @@ int is_minor(int *astack, int *alength, int media)
             from_down = i;
         i--;
     }
+    // printf("from_down: %i", from_down);
     if(*alength - from_down < from_up)
         return(from_down);
     else
