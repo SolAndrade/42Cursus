@@ -2,7 +2,7 @@
 
 void ft_sorting_numbers(t_stacks *astack, t_stacks *bstack, int *alength, int *blength, int *count)
 {
-    // int i = 15;
+    // int i = 10;
     ft_bubble_sort(astack, alength);
     ft_send_all_to_b(astack, bstack, alength, blength, count);
     // while(i > 0)
@@ -15,9 +15,9 @@ void ft_sorting_numbers(t_stacks *astack, t_stacks *bstack, int *alength, int *b
         // i--;
     }
     // ft_assing_target_pos(astack, bstack, alength, blength);
+    // ft_calculate_moves(astack, bstack, alength, blength);
     // ft_print_stacks_all_data(astack, bstack, *alength, *blength);
     // ft_print_stacks(astack, bstack, *alength, *blength);
-    // ft_calculate_moves(astack, bstack, alength, blength);
     ft_order_final_a(astack, bstack, alength, blength, count);
 }
 
@@ -51,7 +51,7 @@ void ft_send_all_to_b(t_stacks *astack, t_stacks *bstack, int *alength, int *ble
     media = main_media;
     while(*alength > 3)
     {
-        while(ft_is_there_a_minor(astack, alength, media) != -1)
+        while(ft_is_there_a_minor(astack, alength, media) != -1 && *alength > 3)
         {
             if(astack[0].index <= media)
                 ft_push_b(astack, bstack, alength, blength, count);
@@ -76,6 +76,7 @@ void ft_assing_target_pos(t_stacks *astack, t_stacks *bstack, int *alength, int 
     while(ib < *blength)
     {
         most_near = (ft_get_max(astack, alength) + 1) - bstack[ib].data;
+        // printf("most_near: %d for %d\n", most_near, bstack[ib].data);
         ia = 0;
         while(ia < *alength)
         {

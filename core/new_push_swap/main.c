@@ -12,6 +12,7 @@ int main(int argc, char **argv)
     int count;
 
     count = 0;
+    ft_empty_struct(astack, bstack, alength);
     if(argc > 1)
     {
         while(arg < argc)
@@ -24,8 +25,30 @@ int main(int argc, char **argv)
         else
             ft_sorting_numbers(astack, bstack, &alength, &blength, &count);
     }
-    ft_print_stacks(astack, bstack, alength, blength);
-    printf("count: %i", count);
+    // ft_print_stacks(astack, bstack, alength, blength);
+    // printf("count: %i", count);
+}
+
+void ft_empty_struct(t_stacks *astack, t_stacks *bstack, int alength)
+{
+    int i = 0;
+
+    while(i < alength)
+    {
+        astack[i].data = 0;
+        astack[i].index = 0;
+        astack[i].target_pos = 0;
+        astack[i].moves = 0;
+        astack[i].moves_a = 0;
+        astack[i].moves_b = 0;
+        bstack[i].data = 0;
+        bstack[i].index = 0;
+        bstack[i].target_pos = 0;
+        bstack[i].moves = 0;
+        bstack[i].moves_a = 0;
+        bstack[i].moves_b = 0;
+        i++;
+    }
 }
 
 void ft_print_stacks(t_stacks *astack, t_stacks *bstack, int alength, int blength)
@@ -61,7 +84,7 @@ void ft_print_stacks_all_data(t_stacks *astack, t_stacks *bstack, int alength, i
     printf("bstack\n");
     while(i < blength)
     {
-        printf("Pos: %d   Data: %d    Index: %d     Target_pos: %d      Moves: %d\n", i, bstack[i].data, bstack[i].index, bstack[i].target_pos, bstack[i].moves);
+        printf("Pos: %d   Data: %d    Index: %d     Target_pos: %d      Moves: %d       Moves_a: %d     Moves_b: %d\n", i, bstack[i].data, bstack[i].index, bstack[i].target_pos, bstack[i].moves, bstack[i].moves_a, bstack[i].moves_b);
         i++;
     }
 }

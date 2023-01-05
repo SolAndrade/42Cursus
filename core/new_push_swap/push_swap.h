@@ -61,6 +61,7 @@ int		ft_get_max_index(t_stacks *stack, int *length);
 void	ft_order_final_a(t_stacks *astack, t_stacks *bstack, int *alength, int *blength, int *count);
 int		ft_get_min(t_stacks *stack, int *length);
 int		ft_is_there_a_minor(t_stacks *stack, int *length, int media);
+void	ft_empty_struct(t_stacks *astack, t_stacks *bstack, int alength);
 
 //For Tests
 void	ft_print_stacks(t_stacks *astack, t_stacks *bstack, int alength, int blength);

@@ -14,7 +14,7 @@ void ft_bubble_sort(t_stacks *astack, int *alength)
     while(ft_checker_a(astack_aux, alength) == 0)
     {
         i = 0;
-        while(i < *alength)
+        while(i < *alength - 1)
         {
             if(astack_aux[i].data > astack_aux[i + 1].data)
                 ft_swap_bubble(astack_aux, i);
