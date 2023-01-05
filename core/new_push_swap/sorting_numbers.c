@@ -2,7 +2,7 @@
 
 void ft_sorting_numbers(t_stacks *astack, t_stacks *bstack, int *alength, int *blength, int *count)
 {
-    // int i = 10;
+    // int i = 90;
     ft_bubble_sort(astack, alength);
     ft_send_all_to_b(astack, bstack, alength, blength, count);
     // while(i > 0)
@@ -16,6 +16,7 @@ void ft_sorting_numbers(t_stacks *astack, t_stacks *bstack, int *alength, int *b
     }
     // ft_assing_target_pos(astack, bstack, alength, blength);
     // ft_calculate_moves(astack, bstack, alength, blength);
+    // ft_accomodate_number(astack, bstack, alength, blength, count);
     // ft_print_stacks_all_data(astack, bstack, *alength, *blength);
     // ft_print_stacks(astack, bstack, *alength, *blength);
     ft_order_final_a(astack, bstack, alength, blength, count);
@@ -129,8 +130,12 @@ int ft_get_min_movements(t_stacks *astack, t_stacks *bstack, int *alength, int *
     index_min_moves = 0;
     while(i < *blength)
     {
-        if(bstack[i].moves < index_min_moves)
+        if(bstack[i].moves < min_moves)
+        {
             index_min_moves = i;
+            min_moves = bstack[i].moves;
+        }
+
         i++;
     }
     return(index_min_moves);
@@ -141,34 +146,58 @@ void ft_accomodate_number(t_stacks *astack, t_stacks *bstack, int *alength, int 
     int index;
 
     index = ft_get_min_movements(astack, bstack, alength, blength);
+    // printf("index: %i\n", index);
     if(bstack[index].moves_a >= 1 && bstack[index].moves_b >= 1)
     {
-        while(bstack[index].moves_a-- >= 0 && bstack[index].moves_b-- >= 0)
+        // printf("entra para %i\n", bstack[index].data);
+        while(bstack[index].moves_a != 0 && bstack[index].moves_b != 0)
+        {
             ft_rotate_stacks(astack, bstack, *alength, *blength, count);
+            bstack[index].moves_a--;
+            bstack[index].moves_b--;
+        }
     }
     else if(bstack[index].moves_a < 0 && bstack[index].moves_b < 0)
     {
-        while(bstack[index].moves_a++ <= 0 && bstack[index].moves_b++ <= 0)
+        while(bstack[index].moves_a != 0 && bstack[index].moves_b != 0)
+        {
             ft_rotate_reverse_stacks(astack, bstack, *alength, *blength, count);
+            bstack[index].moves_a++;
+            // printf("suma a: %i", bstack[index].moves_a);
+            bstack[index].moves_b++;
+        }
     }
     if(bstack[index].moves_a > 0)
     {
-        while(bstack[index].moves_a-- != 0)
+        while(bstack[index].moves_a != 0)
+        {
             ft_rotate_a(astack, *alength, count);
+            bstack[index].moves_a--;
+        }
     }
-    else
+    else if(bstack[index].moves_a < 0)
     {
-        while(bstack[index].moves_a++ != 0)
+        while(bstack[index].moves_a != 0)
+        {
             ft_rotate_reverse_a(astack, *alength, count);
+            bstack[index].moves_a++;
+            // printf("suma a: %i", bstack[index].moves_a);
+        }
     }
     if(bstack[index].moves_b > 0)
     {
-        while(bstack[index].moves_b-- != 0)
+        while(bstack[index].moves_b != 0)
+        {
             ft_rotate_b(bstack, *blength, count);
+            bstack[index].moves_b--;
+        }
     }
-    else
+    else if(bstack[index].moves_b < 0)
     {
-        while(bstack[index].moves_b++ != 0)
+        while(bstack[index].moves_b != 0)
+        {
             ft_rotate_reverse_b(bstack, *blength, count);
+            bstack[index].moves_b++;
+        }
     }
 }
