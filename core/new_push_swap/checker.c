@@ -1,18 +1,9 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: soandrad <soandrad@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/09 20:56:00 by soandrad          #+#    #+#             */
-/*   Updated: 2023/01/11 18:01:36 by soandrad         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
+#include "checker.h"
+#include "get_next_line.h"
 #include "push_swap.h"
 
-// void ft_leaks(void);
+void	ft_empty_struct(t_stacks *astack, t_stacks *bstack, int alength);
+
 int	main(int argc, char **argv)
 {
 	t_main		tm;
@@ -51,23 +42,20 @@ int	main(int argc, char **argv)
 				astack[tm.iarr++].data = tm.nbr;
 			}
 		}
-		if(ft_check_doubles(astack, &tm.al) == 1)
-			return (ft_error());
-		if(ft_checker_a(astack, &tm.al) == 0)
-		{
-			if (tm.al <= 3)
-				ft_three_or_less_inputs(astack, &tm.al, &tm.count);
-			else
-				ft_sorting_numbers(astack, bstack, &tm.al, &tm.bl, &tm.count);
-		}
-		// ft_print_stacks(astack, bstack, tm.al, tm.bl);
-		// printf("count: %i", tm.count);
 		ft_empty_struct(astack, bstack, tm.al);
 		free(astack);
 		free(bstack);
 	}
-	// atexit(ft_leaks);
-	return (0);
+}
+void ft_checker(t_stacks *astack, t_stacks *bstack, int *alength, int *blength)
+{
+	char *line;
+    line = get_next_line(0);
+
+	if(line == "sa")
+		ft_swap_a(astack)
+
+	printf("line: %s", line);
 }
 
 int ft_error()

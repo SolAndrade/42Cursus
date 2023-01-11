@@ -28,8 +28,8 @@ int main(int argc, char **argv)
     // ft_push_b(astack, bstack, &alength, &blength);
     // ft_print_stacks(astack, bstack, alength, blength);
     // ft_push_a(astack, bstack, &alength, &blength);
-    ft_print_stacks(astack, bstack, alength, blength);
-    printf("count: %i", count);
+    // ft_print_stacks(astack, bstack, alength, blength);
+    // printf("count: %i", count);
 }
 
 void ft_print_stacks(int *astack, int *bstack, int alength, int blength)

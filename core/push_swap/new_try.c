@@ -121,13 +121,13 @@ void ft_order_by_stacks_a(int *astack, int *bstack, int *alength, int *blength, 
 
     ft_print_stacks(astack, bstack, *alength, *blength);
     max_b = ft_get_max(bstack, blength);
-    printf("max_b: %i\n", max_b);
+    // printf("max_b: %i\n", max_b);
     min_b = ft_get_min(bstack, blength);
-    printf("min_b: %i\n", min_b);
+    // printf("min_b: %i\n", min_b);
     main_media = ft_get_media(bstack, blength);
-    printf("main_media: %i\n", main_media);
+    // printf("main_media: %i\n", main_media);
     starting = min_b + (main_media * 2);
-    printf("starting: %i\n", starting);
+    // printf("starting: %i\n", starting);
     // media = starting + main_media; ----
     media = max_b;
     // printf("media: %i\n", media);
@@ -135,7 +135,7 @@ void ft_order_by_stacks_a(int *astack, int *bstack, int *alength, int *blength, 
     while(media >= starting)
     {
         // printf("media: %i\n", media);
-        printf("is_minor_a: %i", ft_is_minor_a(bstack, blength, media, media - main_media));
+        // printf("is_minor_a: %i", ft_is_minor_a(bstack, blength, media, media - main_media));
         // while(ft_is_minor_a(bstack, blength, media, starting) > -1) ----
         while(ft_is_minor_a(bstack, blength, media, media - main_media) > -1)
         {
