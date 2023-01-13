@@ -6,7 +6,7 @@
 /*   By: soandrad <soandrad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 18:55:39 by soandrad          #+#    #+#             */
-/*   Updated: 2022/10/01 19:00:33 by soandrad         ###   ########.fr       */
+/*   Updated: 2023/01/13 21:05:33 by soandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ typedef struct atoi_data
 /// by str to int representation.
 /// @param str String representation of an integral number.
 /// @return The converted integral number as an int value. If no valid 
-/// conversion could be performed, it returns zero.
+/// conversion could be performed, it returns zero
 int	ft_atoi(const char *str)
 {
 	t_atoi_data	ad;
