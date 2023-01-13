@@ -6,7 +6,7 @@
 /*   By: soandrad <soandrad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/09 19:13:25 by soandrad          #+#    #+#             */
-/*   Updated: 2022/10/10 18:16:36 by soandrad         ###   ########.fr       */
+/*   Updated: 2023/01/13 21:07:22 by soandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 /// @brief Prints a character 'c' and iterates the value of 'count'.
 /// @param c Character to be printed.
-/// @param count Counter for the amount of characters already printed.
+/// @param count Counter for the amount of characters already printed
 void	ft_putchar(char c, int *count)
 {
 	write(1, &c, 1);
