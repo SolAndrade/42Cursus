@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   checker.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: soandrad <soandrad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/09 20:56:00 by soandrad          #+#    #+#             */
-/*   Updated: 2023/01/13 17:53:06 by soandrad         ###   ########.fr       */
+/*   Created: 2023/01/11 18:57:56 by soandrad          #+#    #+#             */
+/*   Updated: 2023/01/13 18:01:08 by soandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,26 +34,50 @@ int	main(int argc, char **argv)
 		ft_empty_struct(astack, bstack, tm.al);
 		if (ft_fill_stacks(astack, argc, argv) == 1)
 			return (ft_free_ps(astack, bstack, &tm.al), ft_error(1));
-		if (ft_checks(astack, bstack, &tm.al, &tm.bl) == 1)
-			return (ft_error(1));
+		ft_checker(astack, bstack, &tm.al, &tm.bl);
+		ft_free_ps(astack, bstack, &tm.al);
 	}
 	return (0);
 }
 
-int	ft_checks(t_stacks *astack, t_stacks *bstack, int *al, int *bl)
+void	ft_checker(t_stacks *astack, t_stacks *bstack, int *al, int *bl)
 {
-	if (ft_check_doubles(astack, al) == 1)
+	int	flag;
+	int	i;
+
+	i = 0;
+	flag = 0;
+	if (ft_checker_a(astack, al) == 0)
+	{	
+		while (flag == 0)
+		{
+			if (ft_read_movement(astack, bstack, al, bl) == 1)
+				flag = 1;
+		}
+		flag = 0;
+		while (i < *bl && flag == 0)
+		{
+			if (bstack[i].data != '\0')
+				flag = 1;
+			i++;
+		}
+		ft_checker_response(astack, al, flag);
+	}
+	else
+		write(1, "OK\n", 3);
+}
+
+int	ft_checker_response(t_stacks *astack, int *alength, int flag)
+{
+	if (ft_checker_a(astack, alength) == 1 && flag == 0)
 	{
-		ft_free_ps(astack, bstack, al);
+		write(1, "OK\n", 3);
 		return (1);
 	}
-	if (ft_checker_a(astack, al) == 0)
+	else
 	{
-		if (*al <= 3)
-			ft_three_or_less_inputs(astack, al);
-		else
-			ft_sorting_number(astack, bstack, al, bl);
+		write(1, "KO\n", 3);
+		return (1);
 	}
-	ft_free_ps(astack, bstack, al);
 	return (0);
 }

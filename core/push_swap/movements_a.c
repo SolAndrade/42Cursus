@@ -1,76 +1,91 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   movements_a.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: soandrad <soandrad@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/09 21:19:32 by soandrad          #+#    #+#             */
+/*   Updated: 2023/01/13 16:54:24 by soandrad         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
-void ft_swap_a(int *astack, int *count)
+void	ft_swap_a(t_stacks *astack)
 {
-    int aux;
+	t_movements	tm;
 
-    aux = astack[0];
-    astack[0] = astack[1];
-    astack[1] = aux;
-    write(1, "sa", 2);
-    write(1, "\n", 1);
-    *count = *count + 1;
+	tm.aux = astack[0].data;
+	tm.aux_index = astack[0].index;
+	astack[0].data = astack[1].data;
+	astack[0].index = astack[1].index;
+	astack[1].data = tm.aux;
+	astack[1].index = tm.aux_index;
+	write(1, "sa\n", 3);
 }
 
-void ft_rotate_a(int *astack, int alength, int *count)
+void	ft_rotate_a(t_stacks *astack, int al)
 {
-    int aux;
-    int i = 0;
+	t_movements	tm;
 
-    aux = astack[i];
-    while(i < alength - 1)
-    {
-        astack[i] = astack[i+1];
-        i++;
-    }
-    astack[i] = aux;
-    write(1, "ra", 2);
-    write(1, "\n", 1);
-    *count = *count + 1;
+	tm.i = 0;
+	tm.aux = astack[tm.i].data;
+	tm.aux_index = astack[tm.i].index;
+	while (tm.i < al - 1)
+	{
+		astack[tm.i].data = astack[tm.i + 1].data;
+		astack[tm.i].index = astack[tm.i + 1].index;
+		tm.i++;
+	}
+	astack[tm.i].data = tm.aux;
+	astack[tm.i].index = tm.aux_index;
+	write(1, "ra\n", 3);
 }
 
-void ft_rotate_reverse_a(int *astack, int alength, int *count)
+void	ft_rotate_reverse_a(t_stacks *astack, int al)
 {
-    int aux;
+	t_movements	tm;
 
-    alength--;
-    aux = astack[alength];
-    while(alength > 0)
-    {
-        astack[alength] = astack[alength-1];
-        alength--;
-    }
-    astack[0] = aux;
-    write(1, "rra", 3);
-    write(1, "\n", 1);
-    *count = *count + 1;
+	al--;
+	tm.aux = astack[al].data;
+	tm.aux_index = astack[al].index;
+	while (al > 0)
+	{
+		astack[al].data = astack[al - 1].data;
+		astack[al].index = astack[al - 1].index;
+		al--;
+	}
+	astack[0].data = tm.aux;
+	astack[0].index = tm.aux_index;
+	write(1, "rra\n", 4);
 }
 
-void ft_push_a(int *astack, int *bstack, int *alength, int *blength, int *count)
+void	ft_push_a(t_stacks *astack, t_stacks *bstack, int *al, int *bl)
 {
-    int aux;
-    int i = 0;
-    int a_length_aux = *alength;
-    int b_length_aux = *blength;
+	t_movements	tm;
 
-    b_length_aux--;
-    aux = bstack[0];
-    while(i < b_length_aux)
-    {
-        bstack[i] = bstack[i+1];
-        i++;
-    }
-    bstack[i] = '\0';
-    *blength -= 1;
-    i = 0;
-    while(a_length_aux > 0)
-    {
-        astack[a_length_aux] = astack[a_length_aux-1];
-        a_length_aux--;
-    }
-    astack[0] = aux;
-    *alength += 1;
-    write(1, "pa", 2);
-    write(1, "\n", 1);
-    *count = *count + 1;
+	tm.i = 0;
+	tm.aux = bstack[0].data;
+	tm.aux_index = bstack[0].index;
+	while (tm.i < *bl - 1)
+	{
+		bstack[tm.i].data = bstack[tm.i + 1].data;
+		bstack[tm.i].index = bstack[tm.i + 1].index;
+		tm.i++;
+	}
+	bstack[tm.i].data = '\0';
+	bstack[tm.i].index = '\0';
+	*bl -= 1;
+	tm.i = *al;
+	while (tm.i > 0)
+	{
+		astack[tm.i].data = astack[tm.i - 1].data;
+		astack[tm.i].index = astack[tm.i - 1].index;
+		tm.i--;
+	}
+	astack[0].data = tm.aux;
+	astack[0].index = tm.aux_index;
+	*al += 1;
+	write(1, "pa\n", 3);
 }

@@ -6,7 +6,7 @@
 /*   By: soandrad <soandrad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 22:00:39 by soandrad          #+#    #+#             */
-/*   Updated: 2023/01/10 20:38:30 by soandrad         ###   ########.fr       */
+/*   Updated: 2023/01/13 17:00:12 by soandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,16 +33,16 @@ int	ft_get_min_movements(t_stacks *bstack, int *blength)
 	return (index_min_moves);
 }
 
-void	ft_accomodate_number(t_stacks *astack, t_stacks *bstack, int *alength, int *blength, int *count)
+void	ft_accom_number(t_stacks *astack, t_stacks *bstack, int *al, int *bl)
 {
 	int	index;
 
-	index = ft_get_min_movements(bstack, blength);
+	index = ft_get_min_movements(bstack, bl);
 	if (bstack[index].moves_a >= 1 && bstack[index].moves_b >= 1)
 	{
 		while (bstack[index].moves_a != 0 && bstack[index].moves_b != 0)
 		{
-			ft_rotate_stacks(astack, bstack, *alength, *blength, count);
+			ft_rotate_stacks(astack, bstack, *al, *bl);
 			bstack[index].moves_a--;
 			bstack[index].moves_b--;
 		}
@@ -51,25 +51,25 @@ void	ft_accomodate_number(t_stacks *astack, t_stacks *bstack, int *alength, int 
 	{
 		while (bstack[index].moves_a != 0 && bstack[index].moves_b != 0)
 		{
-			ft_rotate_reverse_stacks(astack, bstack, *alength, *blength, count);
+			ft_rotate_re_stacks(astack, bstack, *al, *bl);
 			bstack[index].moves_a++;
 			bstack[index].moves_b++;
 		}
 	}
-	ft_accomodate_number_2(astack, bstack, alength, blength, count);
-	ft_accomodate_number_3(bstack, blength, count);
+	ft_accom_number_2(astack, bstack, al, bl);
+	ft_accom_number_3(bstack, bl);
 }
 
-void	ft_accomodate_number_2(t_stacks *astack, t_stacks *bstack, int *alength, int *blength, int *count)
+void	ft_accom_number_2(t_stacks *astack, t_stacks *bstack, int *al, int *bl)
 {
 	int	index;
 
-	index = ft_get_min_movements(bstack, blength);
+	index = ft_get_min_movements(bstack, bl);
 	if (bstack[index].moves_a > 0)
 	{
 		while (bstack[index].moves_a != 0)
 		{
-			ft_rotate_a(astack, *alength, count);
+			ft_rotate_a(astack, *al);
 			bstack[index].moves_a--;
 		}
 	}
@@ -77,13 +77,13 @@ void	ft_accomodate_number_2(t_stacks *astack, t_stacks *bstack, int *alength, in
 	{
 		while (bstack[index].moves_a != 0)
 		{
-			ft_rotate_reverse_a(astack, *alength, count);
+			ft_rotate_reverse_a(astack, *al);
 			bstack[index].moves_a++;
 		}
 	}
 }
 
-void	ft_accomodate_number_3(t_stacks *bstack, int *blength, int *count)
+void	ft_accom_number_3(t_stacks *bstack, int *blength)
 {
 	int	index;
 
@@ -92,7 +92,7 @@ void	ft_accomodate_number_3(t_stacks *bstack, int *blength, int *count)
 	{
 		while (bstack[index].moves_b != 0)
 		{
-			ft_rotate_b(bstack, *blength, count);
+			ft_rotate_b(bstack, *blength);
 			bstack[index].moves_b--;
 		}
 	}
@@ -100,7 +100,7 @@ void	ft_accomodate_number_3(t_stacks *bstack, int *blength, int *count)
 	{
 		while (bstack[index].moves_b != 0)
 		{
-			ft_rotate_reverse_b(bstack, *blength, count);
+			ft_rotate_reverse_b(bstack, *blength);
 			bstack[index].moves_b++;
 		}
 	}

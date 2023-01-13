@@ -1,94 +1,108 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils_general.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: soandrad <soandrad@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/09 21:46:00 by soandrad          #+#    #+#             */
+/*   Updated: 2023/01/13 15:54:14 by soandrad         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
-void ft_compare_two_b(int *bstack, int *count)
+int	ft_checker_a(t_stacks *astack, int *alength)
 {
-    if(bstack[0] < bstack[1])
-        ft_swap_b(bstack, count);
+	int	i;
+	int	min;
+
+	i = *alength - 1;
+	min = astack[i].data;
+	i--;
+	while (i >= 0)
+	{
+		if (astack[i].data > min)
+			return (0);
+		else
+			min = astack[i].data;
+		i--;
+	}
+	return (1);
 }
 
-void ft_first_near(int *stack_one, int *stack_two, int *count)
+int	ft_get_max(t_stacks *stack, int *length)
 {
-    if(stack_one[0] > stack_two[0])
-    {
-        if(stack_one[0] > stack_two[1])
-        {
-            if(stack_one[0] - stack_two[1] < stack_one[0] - stack_two[0])
-                ft_swap_b(stack_two, count);
-        }
-        else
-        {
-            if(stack_two[1] - stack_one[0] < stack_one[0] - stack_two[0])
-                ft_swap_b(stack_two, count);
-        }
-    }
-    else
-    {
-        if(stack_one[0] > stack_two[1])
-        {
-            if(stack_one[0] - stack_two[1] < stack_two[0] - stack_one[0])
-                ft_swap_b(stack_two, count);
-        }
-        else
-        {
-            if(stack_two[1] - stack_one[0] < stack_two[0] - stack_one[0])
-                ft_swap_b(stack_two, count);
-        }
-    }
+	int	i;
+	int	max;
+
+	i = 1;
+	max = stack[0].data;
+	while (i < *length)
+	{
+		if (stack[i].data > max)
+			max = stack[i].data;
+		i++;
+	}
+	return (max);
 }
 
-int ft_get_max(int *stack, int *length)
+int	ft_get_max_index(t_stacks *stack, int *length)
 {
-    int i = 1;
-    int max = stack[0];
+	int	i;
+	int	index;
+	int	max;
 
-    while(i < *length)
-    {
-        if(stack[i] > max)
-            max = stack[i];
-        i++;
-    }
-    return(max);
+	i = 1;
+	max = stack[0].data;
+	index = 0;
+	while (i < *length)
+	{
+		if (stack[i].data > max)
+		{
+			max = stack[i].data;
+			index = i;
+		}
+		i++;
+	}
+	return (index);
 }
 
-int ft_get_min(int *stack, int *length)
+void	ft_order_final_a(t_stacks *astack, int *alength)
 {
-    int i = 1;
-    int min = stack[0];
+	int	minpos;
+	int	i;
 
-    while(i < *length)
-    {
-        if(stack[i] < min)
-            min = stack[i];
-        i++;
-    }
-    return(min);
+	minpos = 0;
+	i = 0;
+	while (i < *alength)
+	{
+		if (astack[i].data < astack[minpos].data)
+			minpos = i;
+		i++;
+	}
+	if (minpos > *alength / 2)
+	{
+		while (ft_checker_a(astack, alength) == 0)
+			ft_rotate_reverse_a(astack, *alength);
+	}
+	else
+	{
+		while (ft_checker_a(astack, alength) == 0)
+			ft_rotate_a(astack, *alength);
+	}
 }
 
-int ft_get_media(int *stack, int *length)
+int	ft_is_there_a_minor(t_stacks *stack, int *length, int media)
 {
-    int media;
-    int i = 1;
-    int min = stack[0];
-    int max = stack[0];
+	int	i;
 
-    while(i < *length)
-    {
-        if(stack[i] < min)
-            min = stack[i];
-        i++;
-    }
-    i = 1;
-    while(i < *length)
-    {
-        if(stack[i] > max)
-            max = stack[i];
-        i++;
-    }
-    if(*length <= 100)
-        media = (max - min) / 4;
-    else if(*length <= 300)
-        media = (max - min) / 6;
-    else
-        media = (max - min) / 11;
-    return(media);
+	i = 0;
+	while (i < *length)
+	{
+		if (stack[i].index <= media)
+			return (i);
+		i++;
+	}
+	return (-1);
 }

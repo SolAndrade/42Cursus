@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_swap.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: soandrad <soandrad@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/09 22:02:36 by soandrad          #+#    #+#             */
+/*   Updated: 2023/01/13 17:26:15 by soandrad         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
@@ -5,75 +17,118 @@
 # include <stdio.h>
 # include <unistd.h>
 # include <stdlib.h>
+# include <math.h>
 
 //-------- Movements --------
 
+typedef struct s_stacks
+{
+	int				data;
+	int				index;
+	int				target_pos;
+	int				moves;
+	int				moves_a;
+	int				moves_b;
+}	t_stacks;
+
+typedef struct s_movements
+{
+	int				aux;
+	int				aux_index;
+	int				i;
+}	t_movements;
+
+typedef struct s_main
+{
+	int			arg;
+	int			iarr;
+	long		nbr;
+	int			al;
+	int			bl;
+}	t_main;
+
+typedef struct atoi_data
+{
+	long	result;
+	int		sign;
+	int		s;
+	int		p;
+	int		i;
+}	t_at_dt;
+
 // -- Stack A --
-void    ft_swap_a(int *astack, int *count);
-void    ft_push_a(int *astack, int  *bstack, int *alength, int *blength, int *count);
-void    ft_rotate_a(int *astack, int alength, int *count);
-void    ft_rotate_reverse_a(int *astack, int alength, int *count);
+void	ft_swap_a(t_stacks *astack);
+void	ft_push_a(t_stacks *astack, t_stacks *bstack, int *al, int *bl);
+void	ft_rotate_a(t_stacks *astack, int alength);
+void	ft_rotate_reverse_a(t_stacks *astack, int alength);
 
 // -- Stack B --
-void    ft_swap_b(int *bstack, int *count);
-void    ft_rotate_b(int *bstack, int blength, int *count);
-void    ft_rotate_reverse_b(int *bstack, int blength, int *count);
-void    ft_push_b(int *astack, int *bstack, int *alength, int *blength, int *count);
+void	ft_swap_b(t_stacks *bstack);
+void	ft_rotate_b(t_stacks *bstack, int blength);
+void	ft_rotate_reverse_b(t_stacks *bstack, int blength);
+void	ft_push_b(t_stacks *astack, t_stacks *bstack, int *al, int *bl);
 
 // -- Stack A && Stack B --
-void    ft_swap_stacks(int *astack, int *bstack, int *count);
-void    ft_rotate_stacks(int *astack, int *bstack, int alength, int blength, int *count);
-void    ft_rotate_reverse_stacks(int *astack, int *bstack, int alength, int blength, int *count);
+void	ft_swap_stacks(t_stacks *astack, t_stacks *bstack);
+void	ft_rotate_stacks(t_stacks *astack, t_stacks *bstack, int al, int bl);
+void	ft_rotate_re_stacks(t_stacks *astack, t_stacks *bstack, int al, int bl);
 
-//-------- Less Than 10 Inputs --------
-void    ft_five_or_less_inputs(int *astack, int *bstack, int *alength, int *blength, int *count);
-void ft_get_and_position_max_five_inputs(int *astack, int *alength, int *count);
-void ft_get_and_position_min_five_inputs(int *astack, int *alength, int *count);
-void ft_compare_two_a(int *astack, int *count);
-void ft_four_five_inputs(int *astack, int *bstack, int *alength, int *blength, int *count);
-void ft_three_inputs_a(int *astack, int alength, int *count);
+//-------- Less Than 3 Inputs --------
+void	ft_three_or_less_inputs(t_stacks *astack, int *alength);
+void	ft_compare_two_a(t_stacks *astack);
+void	ft_three_inputs_a(t_stacks *astack, int alength);
 
-//-------- This Works--------
-void ft_three_first(int *astack, int *bstack, int *alength, int *blength, int *count);
-void ft_sort(int *astack, int *bstack, int *alength, int *blength, int *count);
-void ft_position_nbr(int *astack, int *bstack, int *alength, int *blength, int *count);
-void    ft_order_final(int *astack, int *bstack, int *alength, int *blength, int *count);
-void ft_first_near(int *stack_one, int *stack_two, int *count);
-void ft_compare_two_b(int *bstack, int *count);
-void ft_position_nbr_b(int *astack, int *bstack, int *alength, int *blength, int *count);
-int is_minor(int *astack, int *alength, int media);
-void ft_send_lowest_b(int *astack, int *bstack, int *alength, int *blength, int *count);
-void ft_sort_new(int *astack, int *bstack, int *alength, int *blength, int *count);
-void    ft_order_final_b(int *astack, int *bstack, int *alength, int *blength, int *count);
+// --------------- Bubble Sort --------------
+void	ft_bubble_sort(t_stacks *astack, int *alength);
+void	ft_swap_bubble(t_stacks *astack, int pos);
 
-//-------- This Actually works--------
-void ft_order_by_stacks_b(int *astack, int *bstack, int *alength, int *blength, int *count);
-void ft_three_first_not_so_order_b(int *bstack, int blength, int *count);
-int ft_get_min_for_media(int *astack, int *alength);
+void	ft_sorting_number(t_stacks *astack, t_stacks *bstack, int *al, int *bl);
+void	ft_assign_final_pos(t_stacks *astack, t_stacks *astack_aux, int *al);
+void	ft_target_pos(t_stacks *astack, t_stacks *bstack, int *al, int *bl);
+void	ft_send_all_to_b(t_stacks *astack, t_stacks *bstack, int *al, int *bl);
+void	ft_calculate_moves(t_stacks *bstack, int *alength, int *blength);
+void	ft_accom_number(t_stacks *astack, t_stacks *bstack, int *al, int *bl);
+void	ft_accom_number_2(t_stacks *astack, t_stacks *bstack, int *al, int *bl);
+void	ft_accom_number_3(t_stacks *bstack, int *blength);
+int		ft_get_min_movements(t_stacks *bstack, int *blength);
 
-// ------------- New Try -----------------
-int get_pos_nbr_b(int *astack, int *bstack, int *blength);
-// void ft_order_by_stacks_a(int *astack, int *bstack, int *alength, int *blength, int *count);
-int get_pos_nbr_a(int *astack, int *bstack, int *alength, int *blength);
-void ft_order_by_stacks_a(int *astack, int *bstack, int *alength, int *blength, int *count);
-int ft_is_minor_a(int *bstack, int *blength, int media, int starting);
+// ------------------ Utils --------------------
+long	ft_atol(const char *str);
+int		ft_get_max(t_stacks *stack, int *length);
+int		ft_get_max_index(t_stacks *stack, int *length);
+void	ft_order_final_a(t_stacks *astack, int *alength);
+int		ft_is_there_a_minor(t_stacks *stack, int *length, int media);
+void	ft_empty_struct(t_stacks *astack, t_stacks *bstack, int alength);
+int		ft_fill_stacks(t_stacks *astack, int argc, char **argv);
+void	ft_free_ps(t_stacks *astack, t_stacks *bstack, int *alength);
+int		ft_fill_stacks(t_stacks *astack, int argc, char **argv);
+t_at_dt	ft_assign_values_atol(void);
 
-// ------------------ Utils General ----------------
-int ft_get_min(int *stack, int *length);
-int ft_get_max(int *stack, int *length);
-int ft_get_media(int *astack, int *alength);
+// -------------------- Split --------------------
+int		ft_count_numbers(const char *s);
+int		ft_split(char const *s, t_stacks *alength);
+char	*ft_substr(char const *s, unsigned int start, size_t len);
+size_t	ft_strlen_split(const char *str);
+int		ft_count_numbers_string(char *s);
+char	*ft_strdup_split(char *src);
 
-// ------------ OLD ----------
-int ft_get_media_old(int *astack, int *alength);
+// -------------------- Input Checks ------------------------
+int		ft_check_errors_atol(const char *str, t_at_dt ad);
+int		ft_checker_a(t_stacks *astack, int *alength);
+int		ft_check_int(char *string);
+int		ft_check_doubles(t_stacks *astack, int *alength);
+int		ft_check_errors(char *string);
+int		ft_error(int i);
+int		ft_checks(t_stacks *astack, t_stacks *bstack, int *al, int *bl);
 
-
-//Utils
-int     ft_atoi(const char *str);
-
-//For Tests
-void ft_print_stacks(int *astack, int *bstack, int alength, int blength);
-int ft_checker(int *astack, int *alength);
-int ft_checker_b(int *bstack, int *blength);
-
+// ----------------------- Checker -------------------------
+void	ft_empty_struct(t_stacks *astack, t_stacks *bstack, int alength);
+int		ft_strcmp(const char *s1, const char *s2);
+int		ft_read_movement(t_stacks *astack, t_stacks *bstack, int *al, int *bl);
+int		ft_read_movement_a(t_stacks *astack, int *alength, char *line);
+int		ft_read_movement_b(t_stacks *bstack, int *blength, char *line);
+void	ft_checker(t_stacks *astack, t_stacks *bstack, int *al, int *bl);
+int		ft_checker_response(t_stacks *astack, int *alength, int flag);
+char	*get_next_line(int fd);
 
 #endif

@@ -6,37 +6,37 @@
 /*   By: soandrad <soandrad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 21:58:36 by soandrad          #+#    #+#             */
-/*   Updated: 2023/01/11 16:03:43 by soandrad         ###   ########.fr       */
+/*   Updated: 2023/01/13 17:02:58 by soandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ft_sorting_numbers(t_stacks *astack, t_stacks *bstack, int *alength, int *blength, int *count)
+void	ft_sorting_number(t_stacks *astack, t_stacks *bstack, int *al, int *bl)
 {
-	ft_bubble_sort(astack, alength);
-	if(ft_checker_a(astack, alength) == 0)
+	ft_bubble_sort(astack, al);
+	if (ft_checker_a(astack, al) == 0)
 	{
-		ft_send_all_to_b(astack, bstack, alength, blength, count);
-		while (*blength > 0)
+		ft_send_all_to_b(astack, bstack, al, bl);
+		while (*bl > 0)
 		{
-			ft_assing_target_pos(astack, bstack, alength, blength);
-			ft_calculate_moves(bstack, alength, blength);
-			ft_accomodate_number(astack, bstack, alength, blength, count);
-			ft_push_a(astack, bstack, alength, blength, count);
+			ft_target_pos(astack, bstack, al, bl);
+			ft_calculate_moves(bstack, al, bl);
+			ft_accom_number(astack, bstack, al, bl);
+			ft_push_a(astack, bstack, al, bl);
 		}
-		ft_order_final_a(astack, alength, count);
+		ft_order_final_a(astack, al);
 	}
 }
 
-void	ft_assign_final_pos(t_stacks *astack, t_stacks *astack_aux, int *alength)
+void	ft_assign_final_pos(t_stacks *astack, t_stacks *astack_aux, int *al)
 {
 	int	i;
 	int	j;
 
 	i = 0;
 	j = 0;
-	while (j < *alength)
+	while (j < *al)
 	{
 		if (astack_aux[j].data == astack[i].data)
 		{
@@ -47,45 +47,45 @@ void	ft_assign_final_pos(t_stacks *astack, t_stacks *astack_aux, int *alength)
 		else
 			i++;
 	}
-	ft_empty_struct(astack_aux, astack_aux, *alength);
+	ft_empty_struct(astack_aux, astack_aux, *al);
 	free(astack_aux);
 }
 
-void	ft_send_all_to_b(t_stacks *astack, t_stacks *bstack, int *alength, int *blength, int *count)
+void	ft_send_all_to_b(t_stacks *astack, t_stacks *bstack, int *al, int *bl)
 {
 	int	media;
 	int	main_media;
 	int	total_numbers;
 
-	total_numbers = *alength;
+	total_numbers = *al;
 	main_media = total_numbers / 2;
 	media = main_media;
-	while (*alength > 3)
+	while (*al > 3)
 	{
-		while (ft_is_there_a_minor(astack, alength, media) != -1 && *alength > 3)
+		while (ft_is_there_a_minor(astack, al, media) != -1 && *al > 3)
 		{
 			if (astack[0].index <= media)
-				ft_push_b(astack, bstack, alength, blength, count);
+				ft_push_b(astack, bstack, al, bl);
 			else
-				ft_rotate_a(astack, *alength, count);
+				ft_rotate_a(astack, *al);
 		}
 		media += main_media;
 	}
-	ft_three_inputs_a(astack, *alength, count);
+	ft_three_inputs_a(astack, *al);
 }
 
-void	ft_assing_target_pos(t_stacks *astack, t_stacks *bstack, int *alength, int *blength)
+void	ft_target_pos(t_stacks *astack, t_stacks *bstack, int *al, int *bl)
 {
 	int	ib;
 	int	ia;
 	int	most_near;
 
 	ib = 0;
-	while (ib < *blength)
+	while (ib < *bl)
 	{
-		most_near = (ft_get_max(astack, alength) + 1) - bstack[ib].data;
+		most_near = (ft_get_max(astack, al) + 1) - bstack[ib].data;
 		ia = 0;
-		while (ia < *alength)
+		while (ia < *al)
 		{
 			if (astack[ia].data > bstack[ib].data)
 			{
@@ -97,8 +97,8 @@ void	ft_assing_target_pos(t_stacks *astack, t_stacks *bstack, int *alength, int 
 			}
 			ia++;
 		}
-		if (most_near == (ft_get_max(astack, alength) + 1) - bstack[ib].data)
-			bstack[ib].target_pos = ft_get_max_index(astack, alength) + 1;
+		if (most_near == (ft_get_max(astack, al) + 1) - bstack[ib].data)
+			bstack[ib].target_pos = ft_get_max_index(astack, al) + 1;
 		ib++;
 	}
 }

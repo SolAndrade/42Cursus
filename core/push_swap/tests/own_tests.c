@@ -1,73 +1,61 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tests.c                                            :+:      :+:    :+:   */
+/*   own_tests.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: soandrad <soandrad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/09 21:39:13 by soandrad          #+#    #+#             */
-/*   Updated: 2023/01/10 20:38:41 by soandrad         ###   ########.fr       */
+/*   Created: 2023/01/13 17:06:33 by soandrad          #+#    #+#             */
+/*   Updated: 2023/01/13 17:07:35 by soandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+typedef struct s_stacks
+{
+	int				data;
+	int				index;
+	int				target_pos;
+	int				moves;
+	int				moves_a;
+	int				moves_b;
+}	t_stacks;
 
-void	ft_print_stacks(t_stacks *astack, t_stacks *bstack, int alength, int blength)
+void	ft_print_stacks(t_stacks *astack, t_stacks *bstack, int al, int bl)
 {
 	int	i;
 
 	i = 0;
 	printf("astack\n");
-	while (i < alength)
+	while (i < al)
 	{
 		printf("%d\n", astack[i].data);
 		i++;
 	}
 	i = 0;
 	printf("bstack\n");
-	while (i < blength)
+	while (i < bl)
 	{
 		printf("%d\n", bstack[i].data);
 		i++;
 	}
 }
 
-void	ft_print_stacks_all_data(t_stacks *astack, t_stacks *bstack, int alength, int blength)
+void	ft_print_all_data(t_stacks *astack, t_stacks *bstack, int al, int bl)
 {
 	int	i;
 
 	i = 0;
 	printf("astack\n");
-	while (i < alength)
+	while (i < al)
 	{
-		printf("Pos: %d   Data: %d    Index: %d\n", i, astack[i].data, astack[i].index);
+		printf("Pos: %d		Data: %d	Index: %d\n", i, astack[i].data, astack[i].index);
 		i++;
 	}
 	i = 0;
 	printf("bstack\n");
-	while (i < blength)
+	while (i < bl)
 	{
 		printf("Pos: %d   Data: %d    Index: %d     Target_pos: %d      Moves: %d       Moves_a: %d     Moves_b: %d\n", i, bstack[i].data, bstack[i].index, bstack[i].target_pos, bstack[i].moves, bstack[i].moves_a, bstack[i].moves_b);
 		i++;
 	}
-}
-
-int ft_check_doubles(t_stacks *astack, int *alength)
-{
-	int i;
-	int j;
-
-	i = *alength - 1;
-	while(i >= 0)
-	{
-		j = i - 1;
-		while(j >= 0)
-		{
-			if(astack[i].data == astack[j].data)
-				return (1);
-			j--;
-		}
-		i--;
-	}
-	return (0);
 }
